@@ -19,8 +19,10 @@ h1 {
 
 button {
   height: 35px;
+  width: 200px;
   border: none;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  cursor: pointer; }
 
 .main-app {
   background-color: #dfdfdf;
@@ -55,11 +57,14 @@ button {
     border-radius: 10px; }
   .readings__button {
     background-color: #c50000;
-    width: 200px;
     font-weight: 600;
     color: white;
     border-radius: 5px;
     margin-top: 30px; }
+    .readings__button:hover {
+      cursor: pointer;
+      transition: background-color 0.5s ease;
+      background-color: #c9716e; }
 
 .module-heading {
   margin-top: 0;

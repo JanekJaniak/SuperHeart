@@ -21,8 +21,10 @@ h1
 
 button
   height: 35px
+  width: 200px
   border: none
   box-sizing: border-box
+  cursor: pointer
 
 .main-app
   background-color: $c-pri
@@ -57,11 +59,14 @@ button
     border-radius: $rad
   &__button
     background-color: $red
-    width: 200px
     font-weight: 600
     color: white
     border-radius: $rad-s
     margin-top: $air
+    &:hover
+      cursor: pointer
+      transition: background-color 0.5s ease
+      background-color: $red-light
 
 .module-heading
   margin-top: 0
