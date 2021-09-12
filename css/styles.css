@@ -1,5 +1,6 @@
 body {
   background-color: #dfdfdf;
+  font-family: Verdana, sans-serif;
   margin: 0;
   height: 100%;
   width: 100%; }
@@ -14,7 +15,12 @@ header {
 
 h1 {
   margin: 0;
-  color: #d10000; }
+  color: #c50000; }
+
+button {
+  height: 35px;
+  border: none;
+  box-sizing: border-box; }
 
 .main-app {
   background-color: #dfdfdf;
@@ -37,16 +43,25 @@ h1 {
   max-width: 500px;
   margin: auto;
   border: 1px solid #b8b8b8;
+  border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
   padding: 30px; }
   .readings__display {
     height: 420px;
-    background-color: #ececec;
+    box-sizing: border-box;
     border: 1px solid #cccccc;
-    box-shadow: inset 0 2px 7px rgba(0, 0, 0, 0.3); }
+    border-radius: 10px; }
+  .readings__button {
+    background-color: #c50000;
+    width: 200px;
+    font-weight: 600;
+    color: white;
+    border-radius: 5px;
+    margin-top: 30px; }
 
 .module-heading {
   margin-top: 0;
-  margin-bottom: air; }
+  margin-bottom: air;
+  font-weight: 500; }
