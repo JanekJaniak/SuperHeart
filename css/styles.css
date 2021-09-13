@@ -63,7 +63,7 @@ button {
     margin-top: 30px; }
     .readings__button:hover {
       cursor: pointer;
-      transition: background-color 0.5s ease;
+      transition: background-color 0.5s ease-out;
       background-color: #c9716e; }
 
 .module-heading {
