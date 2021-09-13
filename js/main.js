@@ -12,7 +12,8 @@ class Reading {
 }
 
 let newReading = new Reading(1, 1614866400000, "2021-03-04", "15:00", 120, 80, 82, 1,);
-
 console.log(newReading);
 
+const addReadingBtn = document.querySelector('.readings__AddButton');
 
+addReadingBtn.addEventListener('click', event => console.log(event.target, 'click'));

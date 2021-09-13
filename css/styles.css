@@ -55,13 +55,13 @@ button {
     box-sizing: border-box;
     border: 1px solid #cccccc;
     border-radius: 10px; }
-  .readings__button {
+  .readings__AddButton {
     background-color: #c50000;
     font-weight: 600;
     color: white;
     border-radius: 5px;
     margin-top: 30px; }
-    .readings__button:hover {
+    .readings__AddButton:hover {
       cursor: pointer;
       transition: background-color 0.5s ease-out;
       background-color: #c9716e; }
