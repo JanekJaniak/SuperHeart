@@ -2,6 +2,7 @@
 
 body
   background-color: $c-pri
+  font-family: Verdana, sans-serif
   margin: 0
   height: 100%
   width: 100%
@@ -16,6 +17,14 @@ header
 
 h1
   margin: 0
+  color: $red
+
+button
+  height: 35px
+  width: 200px
+  border: none
+  box-sizing: border-box
+  cursor: pointer
 
 .main-app
   background-color: $c-pri
@@ -38,5 +47,29 @@ h1
   max-width: 500px
   margin: auto
   border: $border
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  border-radius: $rad
+  box-sizing: border-box
+  box-shadow: $outer-sh
+  text-align: center
+  padding: $p-pri
+  &__display
+    height: 420px
+    box-sizing: border-box
+    border: $light-border
+    border-radius: $rad
+  &__button
+    background-color: $red
+    font-weight: 600
+    color: white
+    border-radius: $rad-s
+    margin-top: $air
+    &:hover
+      cursor: pointer
+      transition: background-color 0.5s ease-out
+      background-color: $red-light
+
+.module-heading
+  margin-top: 0
+  margin-bottom: air
+  font-weight: 500
   

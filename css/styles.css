@@ -1,5 +1,6 @@
 body {
   background-color: #dfdfdf;
+  font-family: Verdana, sans-serif;
   margin: 0;
   height: 100%;
   width: 100%; }
@@ -13,7 +14,15 @@ header {
   margin-bottom: 30px; }
 
 h1 {
-  margin: 0; }
+  margin: 0;
+  color: #c50000; }
+
+button {
+  height: 35px;
+  width: 200px;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer; }
 
 .main-app {
   background-color: #dfdfdf;
@@ -36,4 +45,28 @@ h1 {
   max-width: 500px;
   margin: auto;
   border: 1px solid #b8b8b8;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); }
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding: 30px; }
+  .readings__display {
+    height: 420px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    border-radius: 10px; }
+  .readings__button {
+    background-color: #c50000;
+    font-weight: 600;
+    color: white;
+    border-radius: 5px;
+    margin-top: 30px; }
+    .readings__button:hover {
+      cursor: pointer;
+      transition: background-color 0.5s ease-out;
+      background-color: #c9716e; }
+
+.module-heading {
+  margin-top: 0;
+  margin-bottom: air;
+  font-weight: 500; }
