@@ -12,6 +12,8 @@ class Reading {
 }
 
 const addReadingBtn = document.querySelector('.readings__addButton');
+const saveNewReadingBtn = document.querySelector('.newReadingSaveBtn');
+const cancelNewReadingBtn = document.querySelector('.newReadingCancelBtn');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
 
@@ -20,7 +22,22 @@ const openModal = () => {
   backdrop.style.display = 'block';
 };
 
+const cancelNewReading = () => {
+  modal.style.display = 'none';
+  backdrop.style.display = 'none';
+  console.log('cancel');
+  
+};
+
+const saveNewReading = () => {
+  modal.style.display = 'none';
+  backdrop.style.display = 'none';
+  console.log('save');
+};
+
 let newReading = new Reading(1, 1614866400000, "2021-03-04", "15:00", 120, 80, 82, 1,);
 console.log(newReading);
 
 addReadingBtn.addEventListener('click', openModal);
+cancelNewReadingBtn.addEventListener('click', cancelNewReading);
+saveNewReadingBtn.addEventListener('click', saveNewReading);
