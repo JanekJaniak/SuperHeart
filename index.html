@@ -17,9 +17,28 @@
       <div class="readings">
         <h2 class="module-heading">READINGS</h2>
         <div class="readings__display"></div>
-        <button class="readings__AddButton">ADD</button>
+        <button class="readings__addButton">ADD</button>
       </div>
       <nav class="main-app__nav"></nav>
+    </div>
+    <div class="backdrop"></div>
+    <div class="modal">
+      <h2 class="module-heading newReadingHeading"></h2>
+      <div class="newReadingInputs">
+        <form class="newReadingInputs__form">
+          <label for="systolic">SYSTOLIC</label>
+          <input
+            type="number"
+            id="systolic"
+            name="systolic"
+            placeholder="120"
+          >
+        </form>
+        <div class="newReadingInputs__controls">
+          <button class="newReadingSaveBtn">SAVE</button>
+          <button class="newReadingSaveBtn">CANCEL</button>
+        </div>
+      </div>
     </div>
   </main>
   <script src="js/main.js"></script>
