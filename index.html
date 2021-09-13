@@ -23,15 +23,50 @@
       <nav class="main-app__nav"></nav>
     </div>
     <div class="modal">
-      <h2 class="module-heading newReadingHeading"></h2>
+      <h2 class="module-heading newReadingHeading">NEW READING</h2>
       <div class="newReadingInputs">
         <form class="newReadingInputs__form">
+          <label for="date">DATE</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+          >
+          <label for="time">TIME</label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+          >
           <label for="systolic">SYSTOLIC</label>
           <input
             type="number"
             id="systolic"
             name="systolic"
             placeholder="120"
+          >
+          <label for="diastolic">DIASTOLIC</label>
+          <input
+            type="number"
+            id="diastolic"
+            name="diastolic"
+            placeholder="80"
+          >
+          <label for="heartrate">HEART RATE</label>
+          <input
+            type="number"
+            id="heartrate"
+            name="heartrate"
+            placeholder="80"
+          >
+          <label for="stress">STRESS</label>
+          <input
+            type="range"
+            min="1"
+            max="3"
+            step="1"
+            id="stress"
+            name="stress"
           >
         </form>
         <div class="newReadingInputs__controls">
