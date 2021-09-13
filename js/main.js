@@ -11,9 +11,16 @@ class Reading {
   }
 }
 
+const addReadingBtn = document.querySelector('.readings__addButton');
+const modal = document.querySelector('.modal');
+const backdrop = document.querySelector('.backdrop');
+
+const openModal = () => {
+  modal.style.display = 'block';
+  backdrop.style.display = 'block';
+};
+
 let newReading = new Reading(1, 1614866400000, "2021-03-04", "15:00", 120, 80, 82, 1,);
 console.log(newReading);
 
-const addReadingBtn = document.querySelector('.readings__addButton');
-
-addReadingBtn.addEventListener('click', event => console.log(event.target, 'click'));
+addReadingBtn.addEventListener('click', openModal);
