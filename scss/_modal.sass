@@ -1,3 +1,36 @@
+input
+  box-sizing: border-box
+  background-color: $c-input
+  border: none
+  width: 240px
+  &:focus
+    border: $border
+    border-color: $blue
+    outline: none
+
+form
+  text-align: left
+
+label
+  font-size: 15px
+  font-weight: 600
+  display: block
+  margin-top: $air-s
+
+small
+  font-size: 12px 
+  margin-top: 0px
+
+.invalid
+  border: $border
+  border-color: $red
+  outline: none
+
+.valid
+  border: $border
+  border-color: $green
+  outline: none
+
 .modal
   display: block
   position: fixed
@@ -36,7 +69,7 @@
       cursor: pointer
       transition: background-color 0.5s ease-out
       background-color: $green-light
-      
+
   &__cancel
     background-color: $red
     color: white

@@ -1,3 +1,36 @@
+input {
+  box-sizing: border-box;
+  background-color: #ececec;
+  border: none;
+  width: 240px; }
+  input:focus {
+    border: 1px solid #b8b8b8;
+    border-color: #3297fc;
+    outline: none; }
+
+form {
+  text-align: left; }
+
+label {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  margin-top: 15px; }
+
+small {
+  font-size: 12px;
+  margin-top: 0px; }
+
+.invalid {
+  border: 1px solid #b8b8b8;
+  border-color: #c50000;
+  outline: none; }
+
+.valid {
+  border: 1px solid #b8b8b8;
+  border-color: #4ead41;
+  outline: none; }
+
 .modal {
   display: block;
   position: fixed;
@@ -70,24 +103,6 @@ button {
   border: none;
   box-sizing: border-box;
   border-radius: 5px; }
-
-form {
-  text-align: left; }
-
-label {
-  font-size: 15px;
-  font-weight: 600; }
-
-input {
-  box-sizing: border-box;
-  background-color: #ececec;
-  border: none;
-  margin-bottom: 15px;
-  width: 240px; }
-  input:focus {
-    border: 1px solid #b8b8b8;
-    border-color: #4ead41;
-    outline: none; }
 
 .main-app {
   background-color: #dfdfdf;
