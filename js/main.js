@@ -12,8 +12,8 @@ class Reading {
 }
 
 const addReadingBtn = document.querySelector('.readings__addButton');
-const saveNewReadingBtn = document.querySelector('.newReadingSaveBtn');
-const cancelNewReadingBtn = document.querySelector('.newReadingCancelBtn');
+const saveNewReadingBtn = document.querySelector('.newReadingBtn__save');
+const cancelNewReadingBtn = document.querySelector('.newReadingBtn__cancel');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
 
@@ -22,14 +22,16 @@ const openModal = () => {
   backdrop.style.display = 'block';
 };
 
-const cancelNewReading = () => {
+const cancelNewReading = (e) => {
+  e.preventDefault();
   modal.style.display = 'none';
   backdrop.style.display = 'none';
   console.log('cancel');
   
 };
 
-const saveNewReading = () => {
+const saveNewReading = (e) => {
+  e.preventDefault();
   modal.style.display = 'none';
   backdrop.style.display = 'none';
   console.log('save');
@@ -41,3 +43,4 @@ console.log(newReading);
 addReadingBtn.addEventListener('click', openModal);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 saveNewReadingBtn.addEventListener('click', saveNewReading);
+backdrop.addEventListener('click', cancelNewReading)
