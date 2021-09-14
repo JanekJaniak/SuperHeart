@@ -43,13 +43,15 @@ const areValuesValid = (lenght, min, max) => lenght >= min && lenght <= max ? tr
 //Show error message and class
 const showErrorMsg = (inputId, message) => {
   inputId.classList.add('invalid');
+  inputId.nextElementSibling.classList.remove('invisible');
   inputId.nextElementSibling.textContent=message;
 }
 
 //Remove error message and class
 const removeErrorMsg = (inputId) => {
   inputId.classList.replace('invalid', 'valid');
-  inputId.nextElementSibling.textContent='';
+  inputId.nextElementSibling.textContent='null';
+  inputId.nextElementSibling.classList.add('invisible');
 }
 
 //Inputs Validation
@@ -127,9 +129,7 @@ const submitForm = (event) => {
   isSystolicValid();
   isDiastolicValid();
   isHeartRateValid();
-  console.log(event.target);
   console.log('submit');
-  
 }
 
 const cancelNewReading = (event) => {

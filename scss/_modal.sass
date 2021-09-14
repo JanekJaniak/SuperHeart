@@ -1,7 +1,11 @@
+h3
+  margin-top: 0
+
 input
   box-sizing: border-box
   background-color: $c-input
-  border: none
+  border: $border
+  border-color: $c-sec
   width: 240px
   &:focus
     border: $border
@@ -15,11 +19,12 @@ label
   font-size: 15px
   font-weight: 600
   display: block
-  margin-top: $air-s
+  margin-top: $m-xs
 
 small
   font-size: 12px 
-  margin-top: 0px
+  margin-top: 2px
+  display: block
 
 .invalid
   border: $border
@@ -30,6 +35,9 @@ small
   border: $border
   border-color: $green
   outline: none
+
+.invisible
+  visibility: hidden
 
 .modal
   display: block

@@ -1,7 +1,11 @@
+h3 {
+  margin-top: 0; }
+
 input {
   box-sizing: border-box;
   background-color: #ececec;
-  border: none;
+  border: 1px solid #b8b8b8;
+  border-color: #f3f3f3;
   width: 240px; }
   input:focus {
     border: 1px solid #b8b8b8;
@@ -15,11 +19,12 @@ label {
   font-size: 15px;
   font-weight: 600;
   display: block;
-  margin-top: 15px; }
+  margin-top: 8px; }
 
 small {
   font-size: 12px;
-  margin-top: 0px; }
+  margin-top: 2px;
+  display: block; }
 
 .invalid {
   border: 1px solid #b8b8b8;
@@ -30,6 +35,9 @@ small {
   border: 1px solid #b8b8b8;
   border-color: #4ead41;
   outline: none; }
+
+.invisible {
+  visibility: hidden; }
 
 .modal {
   display: block;
@@ -144,6 +152,5 @@ button {
       background-color: #c9716e; }
 
 .module-heading {
-  margin-top: 30px;
   margin-bottom: 30px;
   font-weight: 500; }
