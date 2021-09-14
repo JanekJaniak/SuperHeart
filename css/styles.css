@@ -4,8 +4,8 @@
   top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f0f0f0;
-  height: 450px;
+  background-color: #f3f3f3;
+  height: 550px;
   width: 300px;
   margin: auto;
   border: 1px solid #b8b8b8;
@@ -23,7 +23,8 @@
   background-color: rgba(0, 0, 0, 0.4); }
 
 .newReadingInputs__controls {
-  margin-top: 30px; }
+  margin-top: 30px;
+  text-align: center; }
 
 .newReadingBtn {
   width: 100px;
@@ -37,7 +38,8 @@
       background-color: #94bf8d; }
   .newReadingBtn__cancel {
     background-color: #c50000;
-    color: white; }
+    color: white;
+    margin-left: 15px; }
     .newReadingBtn__cancel:hover {
       cursor: pointer;
       transition: background-color 0.5s ease-out;
@@ -51,7 +53,7 @@ body {
   width: 100%; }
 
 header {
-  background-color: #f0f0f0;
+  background-color: #f3f3f3;
   height: 60px;
   text-align: center;
   padding-top: 10px;
@@ -69,6 +71,24 @@ button {
   box-sizing: border-box;
   border-radius: 5px; }
 
+form {
+  text-align: left; }
+
+label {
+  font-size: 15px;
+  font-weight: 600; }
+
+input {
+  box-sizing: border-box;
+  background-color: #ececec;
+  border: none;
+  margin-bottom: 15px;
+  width: 240px; }
+  input:focus {
+    border: 1px solid #b8b8b8;
+    border-color: #4ead41;
+    outline: none; }
+
 .main-app {
   background-color: #dfdfdf;
   width: 100%;
@@ -76,14 +96,14 @@ button {
   .main-app__nav {
     height: 60px;
     width: 100%;
-    background-color: #f0f0f0;
+    background-color: #f3f3f3;
     box-sizing: border-box;
     bottom: 0;
     border-top: 1px solid #b8b8b8;
     margin-top: 30px; }
 
 .readings {
-  background-color: #f0f0f0;
+  background-color: #f3f3f3;
   height: 610px;
   max-width: 500px;
   margin: auto;
