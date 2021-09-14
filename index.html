@@ -31,12 +31,14 @@
             type="date"
             id="date"
             name="date"
+            required
           >
           <label for="time">TIME</label>
           <input
             type="time"
             id="time"
             name="time"
+            required
           >
           <label for="systolic">SYSTOLIC</label>
           <input
@@ -46,6 +48,7 @@
             max="300"
             name="systolic"
             placeholder="120"
+            required
           >
           <label for="diastolic">DIASTOLIC</label>
           <input
@@ -55,6 +58,7 @@
             max="300"
             name="diastolic"
             placeholder="80"
+            required
           >
           <label for="heartrate">HEART RATE</label>
           <input
@@ -64,6 +68,7 @@
             max="300"
             name="heartrate"
             placeholder="80"
+            required
           >
           <label for="stress">STRESS</label>
           <input
@@ -75,7 +80,7 @@
             name="stress"
           >
           <div class="newReadingInputs__controls">
-            <button class="newReadingBtn newReadingBtn__save">SAVE</button>
+            <button type="submit" class="newReadingBtn newReadingBtn__save">SAVE</button>
             <button class="newReadingBtn newReadingBtn__cancel">CANCEL</button>
           </div>
         </form>
