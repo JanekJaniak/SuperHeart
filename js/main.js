@@ -41,28 +41,95 @@ const isRequired = (value) => value === '' ? false : true;
 const areValuesValid = (lenght, min, max) => lenght >= min && lenght <= max ? true : false; 
 
 //Show error message and class
-const showErrorMsg = (input, message) => {
-  input.classList.add('invalid');
-  input.nextElementSibling.textContent=message;
+const showErrorMsg = (inputId, message) => {
+  inputId.classList.add('invalid');
+  inputId.nextElementSibling.textContent=message;
 }
 
 //Remove error message and class
-const removeErrorMsg = (input, message) => {
-  input.classList.replace('invalid', 'valid');
-  input.nextElementSibling.textContent=message;
+const removeErrorMsg = (inputId) => {
+  inputId.classList.replace('invalid', 'valid');
+  inputId.nextElementSibling.textContent='';
 }
 
-//Validation function
-const checkReadingValidity = (value) => {
+//Inputs Validation
+const isDateValid = () => {
+  let isValid = false;
+  
+  if(!isRequired(date.value.trim())) {
+    showErrorMsg(date, 'ENTER DATE OF READING');
+  } else {
+    removeErrorMsg(date);
+    isValid = true;
+  }
+  return isValid;
+};
+
+const isTimeValid = () => {
+  let isValid = false;
+  
+  if(!isRequired(time.value.trim())) {
+    showErrorMsg(time, 'ENTER TIME OF READING');
+  } else {
+    removeErrorMsg(time);
+    isValid = true;
+  }
+  return isValid;
+};
+
+const isSystolicValid = () => {
   let isValid = false;
   const min = 40;
   const max = 300;
-  // trim() !!!
-}
+  
+  if(!isRequired(systolic.value.trim())) {
+    showErrorMsg(systolic, 'ENTER VALUE');
+  } else {
+    removeErrorMsg(systolic);
+    isValid = true;
+  }
+  return isValid;
+};
 
-const test = (event) => {
-  event.preventDefault();
-  console.log(systolic.nextElementSibling);
+const isDiastolicValid = () => {
+  let isValid = false;
+  const min = 40;
+  const max = 300;
+  
+  if(!isRequired(diastolic.value.trim())) {
+    showErrorMsg(diastolic, 'ENTER VALUE');
+  } else {
+    removeErrorMsg(diastolic);
+    isValid = true;
+  }
+  return isValid;
+};
+
+const isHeartRateValid = () => {
+  let isValid = false;
+  const min = 40;
+  const max = 200;
+  
+  if(!isRequired(heartrate.value.trim())) {
+    showErrorMsg(heartrate, 'ENTER VALUE');
+  } else {
+    removeErrorMsg(heartrate);
+    isValid = true;
+  }
+  return isValid;
+};
+
+//Submit form
+const submitForm = (event) => {
+  event.preventDefault()
+  isDateValid();
+  isTimeValid();
+  isSystolicValid();
+  isDiastolicValid();
+  isHeartRateValid();
+  console.log(event.target);
+  console.log('submit');
+  
 }
 
 const cancelNewReading = (event) => {
@@ -74,9 +141,6 @@ const cancelNewReading = (event) => {
 
 //Event listeners 
 addReadingBtn.addEventListener('click', openModal);
-
-saveNewReadingBtn.addEventListener('click', test);
+form.addEventListener('submit', submitForm);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
-
-
