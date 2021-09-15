@@ -1,0 +1,90 @@
+h3
+  margin-top: 0
+  color: $blue
+
+input
+  box-sizing: border-box
+  background-color: $c-input
+  border: $border
+  border-color: $c-sec
+  width: 240px
+  &:focus
+    border: $border
+    border-color: $amber
+    outline: none
+
+form
+  text-align: left
+
+label
+  font-size: 15px
+  font-weight: 600
+  display: block
+  margin-top: $m-xs
+
+small
+  font-size: 11px 
+  margin-top: 2px
+  display: block
+  color: $red
+
+.invalid
+  border: $border
+  border-color: $red
+  outline: none
+
+.valid
+  border: $border
+  border-color: $green
+  outline: none
+
+.invisible
+  visibility: hidden
+
+.modal
+  display: block
+  position: fixed
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $c-sec
+  height: 560px
+  width: 300px
+  margin: auto
+  border: $border
+  border-radius: $rad
+  box-sizing: border-box
+  box-shadow: $outer-sh
+  text-align: center
+  padding: $p-pri
+
+.backdrop
+  display: block
+  position: fixed
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.4)
+
+.newReadingInputs__controls
+  margin-top: $air
+  text-align: center
+
+.newReadingBtn
+  width: 100px
+  box-sizing: border-box
+  cursor: pointer
+  &__save
+    background-color: $green
+    &:hover
+      cursor: pointer
+      transition: background-color 0.5s ease-out
+      background-color: $green-light
+
+  &__cancel
+    background-color: $red
+    color: white
+    margin-left: $m-sml
+    &:hover
+      cursor: pointer
+      transition: background-color 0.5s ease-out
+      background-color: $red-light
