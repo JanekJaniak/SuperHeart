@@ -153,6 +153,27 @@ const isFromValid = () => {
   return validations.every(validation => validation === true)
 }
 
+//Realtime validation
+const realtimeValidation = (event) => {
+  switch(event.target.id) {
+    case 'date':
+      isDateValid();
+      break;
+    case 'time':
+      isTimeValid();
+      break;
+    case 'systolic':
+      isSystolicValid();
+      break;
+    case 'diastolic':
+      isDiastolicValid();
+      break;
+    case 'heartrate':
+      isHeartRateValid();
+      break;
+  }
+}
+
 //Submit form
 const submitForm = (event) => {
   event.preventDefault()
@@ -171,5 +192,6 @@ const cancelNewReading = (event) => {
 //Event listeners 
 addReadingBtn.addEventListener('click', openModal);
 form.addEventListener('submit', submitForm);
+form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);

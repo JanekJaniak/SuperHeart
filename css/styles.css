@@ -23,7 +23,7 @@ label {
   margin-top: 8px; }
 
 small {
-  font-size: 12px;
+  font-size: 11px;
   margin-top: 2px;
   display: block;
   color: #c50000; }
@@ -48,7 +48,7 @@ small {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #f3f3f3;
-  height: 550px;
+  height: 560px;
   width: 300px;
   margin: auto;
   border: 1px solid #b8b8b8;
