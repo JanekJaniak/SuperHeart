@@ -1,8 +1,7 @@
 // Reading class
 class Reading {
-  constructor(id, dateCreated, date, time, systolic, diastolic, heartRate, stress) {
+  constructor(id, date, time, systolic, diastolic, heartRate, stress) {
     this.id = id;
-    this.dateCreated = dateCreated;
     this.date = date;
     this.time = time;
     this.systolic = systolic;
@@ -12,9 +11,10 @@ class Reading {
   }
 }
 
+const readings =[]
+
 //Selectors for buttons and backdrop
 const addReadingBtn = document.querySelector('.readings__addButton');
-const saveNewReadingBtn = document.querySelector('.newReadingBtn__save');
 const cancelNewReadingBtn = document.querySelector('.newReadingBtn__cancel');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
@@ -42,12 +42,18 @@ const setNowTimeAndDate = () => {
   time.value = getNowTime;
 }
 
-//Open modal function
+//Open modal 
 const openModal = () => {
   modal.style.display = 'block';
   backdrop.style.display = 'block';
   setNowTimeAndDate();
 };
+
+//Close modal
+const closeModal = () => {
+  modal.style.display = 'none';
+  backdrop.style.display = 'none';
+}
 
 //Inputs validation
 const isRequired = (value) => value === '' ? false : true;
@@ -190,17 +196,31 @@ const removeValidationInfo = () => {
 //Submit form
 const submitForm = (event) => {
   event.preventDefault()
-  console.log(isFromValid())
 
+  if(isFromValid()) {
+    let newReading = new Reading(
+      '_' + Math.random().toString(36).substr(2, 9),
+      date.value,
+      time.value,
+      systolic.value,
+      diastolic.value,
+      heartrate.value,
+      stress.value
+    )
+    
+    readings.push(newReading);
+    closeModal();
+    removeValidationInfo();
+  } 
+  console.log(readings);
 }
 
 //Cancel new reading
 const cancelNewReading = (event) => {
   event.preventDefault();
   removeValidationInfo();
-  modal.style.display = 'none';
-  backdrop.style.display = 'none';
-  form.reset()
+  closeModal();
+  form.reset();
 };
 
 //Event listeners 
