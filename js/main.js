@@ -140,18 +140,27 @@ const isHeartRateValid = () => {
   return isValid;
 };
 
+//Check form validity
+const isFromValid = () => {
+  const validations = [
+    isDateValid(),
+    isTimeValid(),
+    isSystolicValid(),
+    isDiastolicValid(),
+    isHeartRateValid()
+  ]
+
+  return validations.every(validation => validation === true)
+}
+
 //Submit form
 const submitForm = (event) => {
   event.preventDefault()
-  isDateValid();
-  isTimeValid();
-  isSystolicValid();
-  isDiastolicValid();
-  isHeartRateValid();
-  console.log('submit');
-  console.log(stress.value);
+  console.log(isFromValid())
+
 }
 
+//Cancel new reading
 const cancelNewReading = (event) => {
   event.preventDefault();
   modal.style.display = 'none';
