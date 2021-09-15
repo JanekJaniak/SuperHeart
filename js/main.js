@@ -174,6 +174,19 @@ const realtimeValidation = (event) => {
   }
 }
 
+//Input error snd success messages and classes remover
+const removeValidationInfo = () => {
+  const messagesElements = document.getElementsByTagName('small');
+
+  for (let i = 0; i < messagesElements.length; i++) {
+    let element = messagesElements[i];
+
+    element.innerText='null';
+    element.classList.add('invisible');
+    element.previousElementSibling.classList.remove('invalid', 'valid')
+  }
+}
+
 //Submit form
 const submitForm = (event) => {
   event.preventDefault()
@@ -184,6 +197,7 @@ const submitForm = (event) => {
 //Cancel new reading
 const cancelNewReading = (event) => {
   event.preventDefault();
+  removeValidationInfo();
   modal.style.display = 'none';
   backdrop.style.display = 'none';
   form.reset()
