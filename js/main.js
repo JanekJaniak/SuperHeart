@@ -19,12 +19,6 @@ const cancelNewReadingBtn = document.querySelector('.newReadingBtn__cancel');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
 
-//Open modal function
-const openModal = () => {
-  modal.style.display = 'block';
-  backdrop.style.display = 'block';
-};
-
 //Form handling
 const form = document.querySelector('.newReadingInputs__form');
 
@@ -35,6 +29,14 @@ const systolic = form.elements['systolic']
 const diastolic = form.elements['diastolic']
 const heartrate = form.elements['heartrate']
 const stress = form.elements['stress']
+
+//Open modal function
+const openModal = () => {
+  modal.style.display = 'block';
+  backdrop.style.display = 'block';
+  
+};
+
 
 //Inputs validation
 const isRequired = (value) => value === '' ? false : true;
@@ -136,6 +138,8 @@ const submitForm = (event) => {
   isDiastolicValid();
   isHeartRateValid();
   console.log('submit');
+  console.log(new Date().toISOString());
+  console.log(date.value);
 }
 
 const cancelNewReading = (event) => {
