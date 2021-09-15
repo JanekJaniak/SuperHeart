@@ -38,7 +38,7 @@ const stress = form.elements['stress']
 
 //Inputs validation
 const isRequired = (value) => value === '' ? false : true;
-const areValuesValid = (lenght, min, max) => lenght >= min && lenght <= max ? true : false; 
+const areValuesValid = (value, min, max) => value >= min && value <= max ? true : false; 
 
 //Show error message and class
 const showErrorMsg = (inputId, message) => {
@@ -84,8 +84,10 @@ const isSystolicValid = () => {
   const min = 40;
   const max = 300;
   
-  if(!isRequired(systolic.value.trim())) {
+  if (!isRequired(systolic.value.trim())) {
     showErrorMsg(systolic, 'ENTER VALUE');
+  } else if (!areValuesValid(systolic.value.trim(), min, max)) {
+    showErrorMsg(systolic, `ENTER VALUE BETWEEN ${min} AND ${max}`)
   } else {
     removeErrorMsg(systolic);
     isValid = true;
@@ -98,8 +100,10 @@ const isDiastolicValid = () => {
   const min = 40;
   const max = 300;
   
-  if(!isRequired(diastolic.value.trim())) {
+  if (!isRequired(diastolic.value.trim())) {
     showErrorMsg(diastolic, 'ENTER VALUE');
+  } else if (!areValuesValid(diastolic.value.trim(), min, max)) {
+    showErrorMsg(diastolic, `ENTER VALUE BETWEEN ${min} AND ${max}`)
   } else {
     removeErrorMsg(diastolic);
     isValid = true;
@@ -112,8 +116,10 @@ const isHeartRateValid = () => {
   const min = 40;
   const max = 200;
   
-  if(!isRequired(heartrate.value.trim())) {
+  if (!isRequired(heartrate.value.trim())) {
     showErrorMsg(heartrate, 'ENTER VALUE');
+  } else if (!areValuesValid(heartrate.value.trim(), min, max)) {
+    showErrorMsg(heartrate, `ENTER VALUE BETWEEN ${min} AND ${max}`)
   } else {
     removeErrorMsg(heartrate);
     isValid = true;
