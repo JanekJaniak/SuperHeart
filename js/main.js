@@ -11,7 +11,7 @@ class Reading {
   }
 }
 
-const readings =[]
+const readings =[];
 
 //Selectors for buttons and backdrop
 const addReadingBtn = document.querySelector('.readings__addButton');
@@ -23,12 +23,12 @@ const backdrop = document.querySelector('.backdrop');
 const form = document.querySelector('.newReadingInputs__form');
 
 // Form inputs selectors
-const date = form.elements['date']
-const time = form.elements['time']
-const systolic = form.elements['systolic']
-const diastolic = form.elements['diastolic']
-const heartrate = form.elements['heartrate']
-const stress = form.elements['stress']
+const date = form.elements['date'];
+const time = form.elements['time'];
+const systolic = form.elements['systolic'];
+const diastolic = form.elements['diastolic'];
+const heartrate = form.elements['heartrate'];
+const stress = form.elements['stress'];
 
 //Get now date 
 const getNowDate = new Date().toISOString().split('T')[0];
@@ -40,7 +40,7 @@ const getNowTime = new Date().toTimeString().substring(0,5);
 const setNowTimeAndDate = () => {
   date.value = getNowDate;
   time.value = getNowTime;
-}
+};
 
 //Open modal 
 const openModal = () => {
@@ -53,7 +53,7 @@ const openModal = () => {
 const closeModal = () => {
   modal.style.display = 'none';
   backdrop.style.display = 'none';
-}
+};
 
 //Inputs validation
 const isRequired = (value) => value === '' ? false : true;
@@ -64,14 +64,14 @@ const showErrorMsg = (inputId, message) => {
   inputId.classList.add('invalid');
   inputId.nextElementSibling.classList.remove('invisible');
   inputId.nextElementSibling.textContent=message;
-}
+};
 
 //Remove error message and class
 const removeErrorMsg = (inputId) => {
   inputId.classList.replace('invalid', 'valid');
   inputId.nextElementSibling.textContent='null';
   inputId.nextElementSibling.classList.add('invisible');
-}
+};
 
 //Inputs Validation
 const isDateValid = () => {
@@ -154,10 +154,10 @@ const isFromValid = () => {
     isSystolicValid(),
     isDiastolicValid(),
     isHeartRateValid()
-  ]
+  ];
 
-  return validations.every(validation => validation === true)
-}
+  return validations.every(validation => validation === true);
+};
 
 //Realtime validation
 const realtimeValidation = (event) => {
@@ -178,7 +178,7 @@ const realtimeValidation = (event) => {
       isHeartRateValid();
       break;
   }
-}
+};
 
 //Input error snd success messages and classes remover
 const removeValidationInfo = () => {
@@ -191,11 +191,11 @@ const removeValidationInfo = () => {
     element.classList.add('invisible');
     element.previousElementSibling.classList.remove('invalid', 'valid')
   }
-}
+};
 
 //Submit form
 const submitForm = (event) => {
-  event.preventDefault()
+  event.preventDefault();
 
   if(isFromValid()) {
     let newReading = new Reading(
@@ -212,8 +212,7 @@ const submitForm = (event) => {
     closeModal();
     removeValidationInfo();
   } 
-  console.log(readings);
-}
+};
 
 //Cancel new reading
 const cancelNewReading = (event) => {
