@@ -149,9 +149,7 @@ const submitForm = (event) => {
   isDiastolicValid();
   isHeartRateValid();
   console.log('submit');
-  console.log(new Date().toISOString());
-  console.log(getNowDate);
-  console.log(getNowTime);
+  console.log(stress.value);
 }
 
 const cancelNewReading = (event) => {
