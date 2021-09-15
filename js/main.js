@@ -30,13 +30,24 @@ const diastolic = form.elements['diastolic']
 const heartrate = form.elements['heartrate']
 const stress = form.elements['stress']
 
+//Get now date 
+const getNowDate = new Date().toISOString().split('T')[0];
+
+//Get now time
+const getNowTime = new Date().toTimeString().substring(0,5);
+
+//Set now date and time in inputs
+const setNowTimeAndDate = () => {
+  date.value = getNowDate;
+  time.value = getNowTime;
+}
+
 //Open modal function
 const openModal = () => {
   modal.style.display = 'block';
   backdrop.style.display = 'block';
-  
+  setNowTimeAndDate();
 };
-
 
 //Inputs validation
 const isRequired = (value) => value === '' ? false : true;
@@ -139,7 +150,8 @@ const submitForm = (event) => {
   isHeartRateValid();
   console.log('submit');
   console.log(new Date().toISOString());
-  console.log(date.value);
+  console.log(getNowDate);
+  console.log(getNowTime);
 }
 
 const cancelNewReading = (event) => {
