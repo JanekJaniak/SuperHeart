@@ -11,6 +11,7 @@ class Reading {
   }
 }
 
+//Readings array
 const readings =[];
 
 //Selectors for buttons and backdrop
