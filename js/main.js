@@ -31,6 +31,12 @@ const diastolic = form.elements['diastolic'];
 const heartrate = form.elements['heartrate'];
 const stress = form.elements['stress'];
 
+//Get data from server
+const xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json');
+xhr.send();
+
 //Get now date 
 const getNowDate = new Date().toISOString().split('T')[0];
 
