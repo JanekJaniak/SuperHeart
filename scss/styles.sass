@@ -20,13 +20,42 @@ h1
   margin: 0
   color: $red
 
+h5
+  margin: 0
+  font-size: 20px
+
+p
+  margin: 0
+
+ul
+  list-style: none
+  border-radius: $rad
+  padding-left: 0
+  margin: auto
+  overflow: scroll
+  height: 387px
+  box-sizing: border-box
+  -ms-overflow-style: none
+  scrollbar-width: none
+  overflow-y: scroll
+  &::-webkit-scrollbar
+    display: none
+
+li
+  border-bottom: $border
+  background-color: $c-input
+  margin-top: $m-s
+  padding: $p-sec
+  box-shadow: $outer-sh
+
 button
   height: 35px
   width: 200px
   border: none
   box-sizing: border-box
   border-radius: $rad-s
-
+  
+//Main window
 .main-app
   background-color: $c-pri
   width: 100%
@@ -42,6 +71,7 @@ button
     border-top: $border
     margin-top: $air
 
+//Readings
 .readings
   background-color: $c-sec
   height: 610px
@@ -53,12 +83,18 @@ button
   box-shadow: $outer-sh
   text-align: center
   padding: $p-pri
-  &__display
+  &--heading
+    margin-top: 0
+    margin-bottom: $air
+    font-weight: 500
+    color: $blue
+  &--display
     height: 420px
     box-sizing: border-box
     border: $light-border
     border-radius: $rad
-  &__addButton
+    box-shadow: $inner-sh
+  &--add-button
     background-color: $red
     font-weight: 600
     color: white
@@ -68,9 +104,31 @@ button
       transition: background-color 0.5s ease-out
       background-color: $red-light
 
-.module-heading
-  margin-top: 0
-  margin-bottom: $air
-  font-weight: 500
-  color: $blue
-  
+//Readings display
+.display-bar
+  display: flex
+  justify-content: space-evenly
+  border-bottom: $border
+  border-radius: $rad
+  padding: $p-sec
+  background-color: $c-pri
+  &--item
+    margin: 0px
+
+.item-heading
+  display: flex
+  justify-content: center
+  font-size: $f-s
+  font-style: italic
+  margin: $m-xxs
+  &--time
+    margin-left: $air
+
+.item-readings
+  display: flex
+  justify-content: space-around
+  font-size: $f-m
+  border: $border
+  padding: $p-sec
+  box-shadow: $inner-sh
+  background-color: $c-third
