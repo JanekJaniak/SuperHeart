@@ -12,7 +12,26 @@ class Reading {
 }
 
 //Readings array
-const readings =[];
+const readings =[
+  {
+    id: "1",
+    date: "2021-09-22",
+    time: "15:10",
+    systolic: "120",
+    diastolic: "80",
+    heartrate: "70",
+    stress: "1"
+  },
+  {
+    id: "2",
+    date: "2021-09-23",
+    time: "11:10",
+    systolic: "157",
+    diastolic: "111",
+    heartrate: "94",
+    stress: "3"
+  }
+];
 
 //Selectors for buttons and backdrop
 const addReadingBtn = document.querySelector('.readings__addButton');
