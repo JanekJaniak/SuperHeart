@@ -18,28 +18,32 @@
       <div class="readings">
         <h2 class="readings--heading">READINGS</h2>
         <div class="readings--display">
-          <div class="readings__display__bar"></div>
-          <ul class=".readings-list">
-            <li class=".readings-list-item">
+          <div class="display-bar">
+            <h5 class="display-bar--item">Pressure</h5>
+            <h5 class="display-bar--item">Heart rate</h5>
+            <h5 class="display-bar--item">Stress</h5>
+          </div>
+          <ul class="readings-list">
+            <li class="readings-list--item">
               <div class="item-heading">
-                <p class="item-heading__date">2011-09-11</p>
-                <p class="item-heading__time">10:45</p>
+                <p class="item-heading--date">2011-09-11</p>
+                <p class="item-heading--time">10:45</p>
               </div>
               <div class="item-readings">
-                <p class="item-readings__pressure">120 / 80</p>
-                <p class="item-readings__heartrate">80</p>
-                <p class="item-readings__stress">LOW</p>
+                <p class="item-readings--pressure">120 / 80</p>
+                <p class="item-readings--heartrate">80</p>
+                <p class="item-readings--stress">LOW</p>
               </div>
             </li>
-            <li class=".readings-list-item">
+            <li class="readings-list--item">
               <div class="item-heading">
-                <p class="item-heading__date">2013-09-13</p>
-                <p class="item-heading__time">10:45</p>
+                <p class="item-heading--date">2013-09-13</p>
+                <p class="item-heading--time">10:45</p>
               </div>
               <div class="item-readings">
-                <p class="item-readings__pressure">120 / 80</p>
-                <p class="item-readings__heartrate">80</p>
-                <p class="item-readings__stress">LOW</p>
+                <p class="item-readings--pressure">120 / 80</p>
+                <p class="item-readings--heartrate">80</p>
+                <p class="item-readings--stress">LOW</p>
               </div>
             </li>
           </ul>
@@ -64,6 +68,7 @@
             type="time"
             id="time"
             name="time"
+            step="60"
           >
           <small class="invisible">null</small>
           <label for="systolic">SYSTOLIC</label>
