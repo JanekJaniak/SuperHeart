@@ -33,14 +33,19 @@ const readings =[
   }
 ];
 
+//Readings display selectors
+const readingsDisplay = document.querySelector('readings--display');
+const readingsList = document.querySelector('.readings-list');
+const readingsListIitem = document.querySelector('.readings-list-item');
+
 //Selectors for buttons and backdrop
-const addReadingBtn = document.querySelector('.readings__addButton');
-const cancelNewReadingBtn = document.querySelector('.newReadingBtn__cancel');
+const addReadingBtn = document.querySelector('.readings--add-button');
+const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
 
 //Form handling
-const form = document.querySelector('.newReadingInputs__form');
+const form = document.querySelector('.new-reading-inputs--form');
 
 // Form inputs selectors
 const date = form.elements['date'];

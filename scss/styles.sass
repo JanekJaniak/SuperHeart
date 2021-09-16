@@ -20,6 +20,9 @@ h1
   margin: 0
   color: $red
 
+ul
+   list-style-type: none
+
 button
   height: 35px
   width: 200px
@@ -53,12 +56,17 @@ button
   box-shadow: $outer-sh
   text-align: center
   padding: $p-pri
-  &__display
+  &--heading
+    margin-top: 0
+    margin-bottom: $air
+    font-weight: 500
+    color: $blue
+  &--display
     height: 420px
     box-sizing: border-box
     border: $light-border
     border-radius: $rad
-  &__addButton
+  &--add-button
     background-color: $red
     font-weight: 600
     color: white
@@ -67,10 +75,4 @@ button
       cursor: pointer
       transition: background-color 0.5s ease-out
       background-color: $red-light
-
-.module-heading
-  margin-top: 0
-  margin-bottom: $air
-  font-weight: 500
-  color: $blue
   

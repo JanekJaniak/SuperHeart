@@ -65,25 +65,25 @@ small {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4); }
 
-.newReadingInputs__controls {
+.new-reading-inputs--controls {
   margin-top: 30px;
   text-align: center; }
 
-.newReadingBtn {
+.new-reading-btn {
   width: 100px;
   box-sizing: border-box;
   cursor: pointer; }
-  .newReadingBtn__save {
+  .new-reading-btn--save {
     background-color: #4ead41; }
-    .newReadingBtn__save:hover {
+    .new-reading-btn--save:hover {
       cursor: pointer;
       transition: background-color 0.5s ease-out;
       background-color: #77CC6A; }
-  .newReadingBtn__cancel {
+  .new-reading-btn--cancel {
     background-color: #c50000;
     color: white;
     margin-left: 15px; }
-    .newReadingBtn__cancel:hover {
+    .new-reading-btn--cancel:hover {
       cursor: pointer;
       transition: background-color 0.5s ease-out;
       background-color: #F51010; }
@@ -106,6 +106,9 @@ header {
 h1 {
   margin: 0;
   color: #c50000; }
+
+ul {
+  list-style-type: none; }
 
 button {
   height: 35px;
@@ -138,23 +141,22 @@ button {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
   padding: 30px; }
-  .readings__display {
+  .readings--heading {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-weight: 500;
+    color: #2274A5; }
+  .readings--display {
     height: 420px;
     box-sizing: border-box;
     border: 1px solid #cccccc;
     border-radius: 10px; }
-  .readings__addButton {
+  .readings--add-button {
     background-color: #c50000;
     font-weight: 600;
     color: white;
     margin-top: 30px; }
-    .readings__addButton:hover {
+    .readings--add-button:hover {
       cursor: pointer;
       transition: background-color 0.5s ease-out;
       background-color: #F51010; }
-
-.module-heading {
-  margin-top: 0;
-  margin-bottom: 30px;
-  font-weight: 500;
-  color: #2274A5; }

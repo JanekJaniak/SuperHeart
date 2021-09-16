@@ -16,16 +16,42 @@
   <main>
     <div class="main-app">
       <div class="readings">
-        <h2 class="module-heading">READINGS</h2>
-        <div class="readings__display"></div>
-        <button class="readings__addButton">ADD</button>
+        <h2 class="readings--heading">READINGS</h2>
+        <div class="readings--display">
+          <div class="readings__display__bar"></div>
+          <ul class=".readings-list">
+            <li class=".readings-list-item">
+              <div class="item-heading">
+                <p class="item-heading__date">2011-09-11</p>
+                <p class="item-heading__time">10:45</p>
+              </div>
+              <div class="item-readings">
+                <p class="item-readings__pressure">120 / 80</p>
+                <p class="item-readings__heartrate">80</p>
+                <p class="item-readings__stress">LOW</p>
+              </div>
+            </li>
+            <li class=".readings-list-item">
+              <div class="item-heading">
+                <p class="item-heading__date">2013-09-13</p>
+                <p class="item-heading__time">10:45</p>
+              </div>
+              <div class="item-readings">
+                <p class="item-readings__pressure">120 / 80</p>
+                <p class="item-readings__heartrate">80</p>
+                <p class="item-readings__stress">LOW</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button class="readings--add-button">ADD</button>
       </div>
       <nav class="main-app__nav"></nav>
     </div>
     <div class="modal">
-      <h3  class="module-heading newReadingHeading">NEW READING</h2>
-      <div class="newReadingInputs">
-        <form class="newReadingInputs__form">
+      <h3  class="new-reading-heading">NEW READING</h2>
+      <div class="new-reading">
+        <form class="new-reading-inputs--form">
           <label for="date">DATE</label>
           <input
             type="date"
@@ -74,9 +100,9 @@
             id="stress"
             name="stress"
           >
-          <div class="newReadingInputs__controls">
-            <button type="submit" class="newReadingBtn newReadingBtn__save">SAVE</button>
-            <button class="newReadingBtn newReadingBtn__cancel">CANCEL</button>
+          <div class="new-reading-inputs--controls">
+            <button type="submit" class="new-reading-btn new-reading-btn--save">SAVE</button>
+            <button class="new-reading-btn new-reading-btn--cancel">CANCEL</button>
           </div>
         </form>
       </div>
