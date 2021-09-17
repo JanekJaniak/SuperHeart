@@ -81,14 +81,14 @@ const renderReadingElement = (reading) => {
 
   switch(reading.stress) {
     case('1'):
-    stressString = 'LOW'
-    break;
+      stressString = 'LOW'
+      break;
     case('2'):
-    stressString = 'MID'
-    break;
+      stressString = 'MID'
+      break;
     case('3'):
-    stressString = 'HIGH'
-    break;
+      stressString = 'HIGH'
+      break;
   }
 
   stressReading.innerText = stressString;
@@ -106,7 +106,7 @@ const renderReadingElement = (reading) => {
 
   console.log(reading);
   console.log('render');
-}
+};
 
 //Render elements from reading array
 const renderReadings = () => {
@@ -115,7 +115,7 @@ const renderReadings = () => {
     const reading = readings[i];
     renderReadingElement(reading);
   }
-}
+};
 
 //Form handling
 const form = document.querySelector('.new-reading-inputs--form');
@@ -127,7 +127,6 @@ const systolic = form.elements['systolic'];
 const diastolic = form.elements['diastolic'];
 const heartrate = form.elements['heartrate'];
 const stress = form.elements['stress'];
-
 
 //Get now date 
 const getNowDate = new Date().toISOString().split('T')[0];
