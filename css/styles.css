@@ -197,16 +197,16 @@ button {
   .display-bar--item {
     margin: 0px; }
 
-.item-heading {
+.element-heading {
   display: flex;
   justify-content: center;
   font-size: 16px;
   font-style: italic;
   margin: 4px; }
-  .item-heading--time {
+  .element-heading--time {
     margin-left: 30px; }
 
-.item-readings {
+.element-readings {
   display: flex;
   justify-content: space-around;
   font-size: 22px;
