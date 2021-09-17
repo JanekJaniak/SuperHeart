@@ -11,6 +11,21 @@ class Reading {
   }
 }
 
+//Readings display selectors
+const readingsList = document.querySelector('.readings-list');
+
+//Selectors for buttons and backdrop
+const addReadingBtn = document.querySelector('.readings--add-button');
+const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
+const modal = document.querySelector('.modal');
+const backdrop = document.querySelector('.backdrop');
+
+//Get data from server
+const xhr = new XMLHttpRequest();
+
+xhr.open('GET', 'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json');
+xhr.send();
+
 //Readings array
 const readings =[
   {
@@ -33,16 +48,74 @@ const readings =[
   }
 ];
 
-//Readings display selectors
-const readingsDisplay = document.querySelector('readings--display');
-const readingsList = document.querySelector('.readings-list');
-const readingsListIitem = document.querySelector('.readings-list-item');
+//Create readings list
+const renderReadingElement = (reading) => {
+  const newLiElement = document.createElement('li');
+  newLiElement.classList.add('readings-list--element');
 
-//Selectors for buttons and backdrop
-const addReadingBtn = document.querySelector('.readings--add-button');
-const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
-const modal = document.querySelector('.modal');
-const backdrop = document.querySelector('.backdrop');
+  const elementHeading = document.createElement('div');
+  elementHeading.classList.add('element-heading');
+
+  const headingDate = document.createElement('p');
+  headingDate.classList.add('element-heading--date');
+  headingDate.innerText = reading.date;
+  
+  const headingTime = document.createElement('p');
+  headingTime.classList.add('element-heading--time');
+  headingTime.innerText = reading.time;
+
+  const elementReadings = document.createElement('div');
+  elementReadings.classList.add('element-readings');
+
+  const pressureReading = document.createElement('p');
+  pressureReading.classList.add('element-readings--pressure');
+  pressureReading.innerText = `${reading.systolic} / ${reading.diastolic}`;
+  
+  const heartrateReading = document.createElement('p');
+  heartrateReading.classList.add('element-readings--heartrate');
+  heartrateReading.innerText = reading.heartrate;
+  
+  const stressReading = document.createElement('p');
+  stressReading.classList.add('element-readings--stress');
+  let stressString = '';
+
+  switch(reading.stress) {
+    case('1'):
+      stressString = 'LOW'
+      break;
+    case('2'):
+      stressString = 'MID'
+      break;
+    case('3'):
+      stressString = 'HIGH'
+      break;
+  }
+
+  stressReading.innerText = stressString;
+  
+  readingsList.appendChild(newLiElement);
+
+  newLiElement.appendChild(elementHeading);
+  elementHeading.appendChild(headingDate);
+  elementHeading.appendChild(headingTime);
+
+  newLiElement.appendChild(elementReadings);
+  elementReadings.appendChild(pressureReading);
+  elementReadings.appendChild(heartrateReading);
+  elementReadings.appendChild(stressReading);
+
+  console.log(reading);
+  console.log('render');
+};
+
+//Render elements from reading array
+const renderReadings = () => {
+  
+  for(let i = 0; i < readings.length; i++) {
+    const reading = readings[i];
+    renderReadingElement(reading);
+  }
+};
 
 //Form handling
 const form = document.querySelector('.new-reading-inputs--form');
@@ -54,12 +127,6 @@ const systolic = form.elements['systolic'];
 const diastolic = form.elements['diastolic'];
 const heartrate = form.elements['heartrate'];
 const stress = form.elements['stress'];
-
-//Get data from server
-const xhr = new XMLHttpRequest();
-
-xhr.open('GET', 'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json');
-xhr.send();
 
 //Get now date 
 const getNowDate = new Date().toISOString().split('T')[0];
@@ -259,3 +326,6 @@ form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
+
+//Render readings
+renderReadings();
