@@ -1,12 +1,12 @@
 // Reading class
 class Reading {
-  constructor(id, date, time, systolic, diastolic, heartRate, stress) {
+  constructor(id, date, time, systolic, diastolic, heartrate, stress) {
     this.id = id;
     this.date = date;
     this.time = time;
     this.systolic = systolic;
     this.diastolic = diastolic;
-    this.heartRate = heartRate;
+    this.heartrate = heartrate;
     this.stress = stress;
   }
 }
@@ -104,13 +104,13 @@ const renderReadingElement = (reading) => {
   elementReadings.appendChild(heartrateReading);
   elementReadings.appendChild(stressReading);
 
-  console.log(reading);
-  console.log('render');
 };
 
 //Render elements from reading array
 const renderReadings = () => {
-  
+  //Clear list before rendering
+  readingsList.innerHTML = '';
+
   for(let i = 0; i < readings.length; i++) {
     const reading = readings[i];
     renderReadingElement(reading);
@@ -309,6 +309,8 @@ const submitForm = (event) => {
     readings.push(newReading);
     closeModal();
     removeValidationInfo();
+    form.reset();
+    renderReadings();
   } 
 };
 
