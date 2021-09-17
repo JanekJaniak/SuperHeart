@@ -49,7 +49,7 @@ const readings =[
 ];
 
 //Create readings list
-const renderReadingElement = () => {
+const renderReadingElement = (reading) => {
   const newLiElement = document.createElement('li');
   newLiElement.classList.add('readings-list--element');
 
@@ -58,21 +58,40 @@ const renderReadingElement = () => {
 
   const headingDate = document.createElement('p');
   headingDate.classList.add('element-heading--date');
+  headingDate.innerText = reading.date;
   
   const headingTime = document.createElement('p');
-  headingTime.classList.add('element-heading--date');
+  headingTime.classList.add('element-heading--time');
+  headingTime.innerText = reading.time;
 
   const elementReadings = document.createElement('div');
   elementReadings.classList.add('element-readings');
 
   const pressureReading = document.createElement('p');
-  pressureReading.classList.add('element-readings--pressure')
+  pressureReading.classList.add('element-readings--pressure');
+  pressureReading.innerText = `${reading.systolic} / ${reading.diastolic}`;
   
   const heartrateReading = document.createElement('p');
-  heartrateReading.classList.add('element-readings--heartrate')
+  heartrateReading.classList.add('element-readings--heartrate');
+  heartrateReading.innerText = reading.heartrate;
   
   const stressReading = document.createElement('p');
-  stressReading.classList.add('element-readings--stress')
+  stressReading.classList.add('element-readings--stress');
+  let stressString = '';
+
+  switch(reading.stress) {
+    case('1'):
+    stressString = 'LOW'
+    break;
+    case('2'):
+    stressString = 'MID'
+    break;
+    case('3'):
+    stressString = 'HIGH'
+    break;
+  }
+
+  stressReading.innerText = stressString;
   
   readingsList.appendChild(newLiElement);
 
@@ -85,7 +104,17 @@ const renderReadingElement = () => {
   elementReadings.appendChild(heartrateReading);
   elementReadings.appendChild(stressReading);
 
-  console.log('render');  
+  console.log(reading);
+  console.log('render');
+}
+
+//Render elements from reading array
+const renderReadings = () => {
+  
+  for(let i = 0; i < readings.length; i++) {
+    const reading = readings[i];
+    renderReadingElement(reading);
+  }
 }
 
 //Form handling
@@ -114,10 +143,9 @@ const setNowTimeAndDate = () => {
 
 //Open modal 
 const openModal = () => {
-  // modal.style.display = 'block';
-  // backdrop.style.display = 'block';
-  // setNowTimeAndDate();
-  renderReadingElement();
+  modal.style.display = 'block';
+  backdrop.style.display = 'block';
+  setNowTimeAndDate();
 };
 
 //Close modal
@@ -299,3 +327,6 @@ form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
+
+//Render readings
+renderReadings();
