@@ -1,12 +1,12 @@
 // Reading class
 class Reading {
-  constructor(id, date, time, systolic, diastolic, heartRate, stress) {
+  constructor(id, date, time, systolic, diastolic, heartrate, stress) {
     this.id = id;
     this.date = date;
     this.time = time;
     this.systolic = systolic;
     this.diastolic = diastolic;
-    this.heartRate = heartRate;
+    this.heartrate = heartrate;
     this.stress = stress;
   }
 }
@@ -19,34 +19,51 @@ const addReadingBtn = document.querySelector('.readings--add-button');
 const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
-
-//Get data from server
-const xhr = new XMLHttpRequest();
-
-xhr.open('GET', 'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json');
-xhr.send();
+const sendDataBtn = document.querySelector('.main-nav--send');
 
 //Readings array
 const readings =[
   {
-    id: "1",
+    id: "001",
     date: "2021-09-22",
     time: "15:10",
     systolic: "120",
     diastolic: "80",
     heartrate: "70",
     stress: "1"
-  },
-  {
-    id: "2",
-    date: "2021-09-23",
-    time: "11:10",
-    systolic: "157",
-    diastolic: "111",
-    heartrate: "94",
-    stress: "3"
   }
 ];
+
+//Get data from server using XMLHttpRequest
+const sendRequest = (method, url) => {
+  const promise = new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+  
+    xhr.open(method, url);
+    xhr.responseType = 'json'; // Parse automatically
+    xhr.onload = () => resolve(xhr.response)
+    xhr.send();
+  });
+  return promise;
+};
+
+async function getData() {
+  const responseData = await sendRequest(
+    'GET', 
+    'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json'
+  );
+
+  responseData.map(reading => readings.push(reading));
+
+  renderReadings();
+}
+
+  //Update list on server
+async function sendData() {
+  // const updatedData = 
+  console.log('SEND');
+  
+} 
 
 //Create readings list
 const renderReadingElement = (reading) => {
@@ -95,6 +112,7 @@ const renderReadingElement = (reading) => {
   
   readingsList.appendChild(newLiElement);
 
+  //APPEND MULTIPLE !!!
   newLiElement.appendChild(elementHeading);
   elementHeading.appendChild(headingDate);
   elementHeading.appendChild(headingTime);
@@ -103,9 +121,6 @@ const renderReadingElement = (reading) => {
   elementReadings.appendChild(pressureReading);
   elementReadings.appendChild(heartrateReading);
   elementReadings.appendChild(stressReading);
-
-  console.log(reading);
-  console.log('render');
 };
 
 //Render elements from reading array
@@ -171,7 +186,7 @@ const removeErrorMsg = (inputId) => {
   inputId.nextElementSibling.classList.add('invisible');
 };
 
-//Inputs Validation
+//Inputs Validation REAFCTOR !!!
 const isDateValid = () => {
   let isValid = false;
   
@@ -309,6 +324,7 @@ const submitForm = (event) => {
     readings.push(newReading);
     closeModal();
     removeValidationInfo();
+    renderReadings();
   } 
 };
 
@@ -326,6 +342,6 @@ form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
+sendDataBtn.addEventListener('click', sendData);
 
-//Render readings
-renderReadings();
+getData();
