@@ -13,13 +13,13 @@ class Reading {
 
 //Readings display selectors
 const readingsList = document.querySelector('.readings-list');
+const readingsError = document.querySelector('.readings--error');
 
 //Selectors for buttons and backdrop
 const addReadingBtn = document.querySelector('.readings--add-button');
 const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
-const sendDataBtn = document.querySelector('.main-nav--send');
 
 //Readings array
 const readings =[
@@ -41,32 +41,52 @@ const sendRequest = (method, url) => {
   
     xhr.open(method, url);
     xhr.responseType = 'json'; // Parse automatically
-    xhr.onload = () => resolve(xhr.response)
+
+    xhr.onload = () => {
+      if(xhr.status >= 200 && xhr.status <= 300) {
+        resolve(xhr.response);
+      } else {
+        reject(new Error(
+          `Server error: Status: ${xhr.status} Message: ${xhr.statusText}`
+        ));
+      }
+    };
+
+    xhr.onerror = () => {
+      reject(new Error('No internet connection'));
+    };
+
     xhr.send();
   });
   return promise;
 };
 
 async function getData() {
-  const responseData = await sendRequest(
-    'GET', 
-    'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json'
-  );
+  try {
+    const responseData = await sendRequest(
+      'GET', 
+      'http://janjaniak.pl/AppsData/SuperHeart/eadingsData.json'
+    );
 
-  responseData.map(reading => readings.push(reading));
+    responseData.map(reading => readings.push(reading));
 
-  renderReadings();
+    renderReadings();
+  } catch (error) {
+    console.log(error.message);
+    showError();  
+
+  }
 }
 
-  //Update list on server
-async function sendData() {
-  const updatedData = readings
-  console.log(updatedData);
-  
-  console.log('SEND');
-  
-} 
+  //Update list on server!!!
+  //Show error in error readings list
 
+const showError = () => {
+  const errorMessage = document.createElement('p');
+  errorMessage.innerText = `Sorry, I couldn't get data. Try again later`;
+  errorMessage.classList.add('readings--error')
+  readingsError.appendChild(errorMessage);
+}
 //Create readings list
 const renderReadingElement = (reading) => {
   const newLiElement = document.createElement('li');
@@ -347,6 +367,5 @@ form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
-sendDataBtn.addEventListener('click', sendData);
 
 getData();
