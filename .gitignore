@@ -91,5 +91,4 @@ lerna-debug.log
 Thumbs.db
 
 #node
-.nvm
-/home/janek/.nvm
+*.nvm
