@@ -24,13 +24,13 @@ const sendDataBtn = document.querySelector('.main-nav--send');
 //Readings array
 const readings =[
   {
-    id: "001",
+    id: 100,
     date: "2021-09-22",
     time: "15:10",
-    systolic: "120",
-    diastolic: "80",
-    heartrate: "70",
-    stress: "1"
+    systolic: 120,
+    diastolic: 80,
+    heartrate: 70,
+    stress: 1
   }
 ];
 
@@ -60,7 +60,9 @@ async function getData() {
 
   //Update list on server
 async function sendData() {
-  // const updatedData = 
+  const updatedData = readings
+  console.log(updatedData);
+  
   console.log('SEND');
   
 } 
@@ -97,13 +99,13 @@ const renderReadingElement = (reading) => {
   let stressString = '';
 
   switch(reading.stress) {
-    case('1'):
+    case(1):
       stressString = 'LOW'
       break;
-    case('2'):
+    case(2):
       stressString = 'MID'
       break;
-    case('3'):
+    case(3):
       stressString = 'HIGH'
       break;
   }
