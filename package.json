@@ -10,6 +10,7 @@
   "author": "Jan Janiak",
   "license": "ISC",
   "dependencies": {
+    "latest": "^0.2.0",
     "node-sass": "^6.0.1"
   }
 }

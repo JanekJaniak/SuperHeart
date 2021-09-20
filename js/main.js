@@ -65,28 +65,29 @@ async function getData() {
   try {
     const responseData = await sendRequest(
       'GET', 
-      'http://janjaniak.pl/AppsData/SuperHeart/eadingsData.json'
+      'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json'
     );
 
     responseData.map(reading => readings.push(reading));
 
+    readingsError.innerHTML = '';
     renderReadings();
   } catch (error) {
     console.log(error.message);
     showError();  
-
   }
 }
 
   //Update list on server!!!
-  //Show error in error readings list
 
+  //Show error in error readings list
 const showError = () => {
   const errorMessage = document.createElement('p');
   errorMessage.innerText = `Sorry, I couldn't get data. Try again later`;
-  errorMessage.classList.add('readings--error')
+  errorMessage.classList.add('readings--error--txt')
   readingsError.appendChild(errorMessage);
 }
+
 //Create readings list
 const renderReadingElement = (reading) => {
   const newLiElement = document.createElement('li');
