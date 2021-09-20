@@ -125,7 +125,9 @@ const renderReadingElement = (reading) => {
 
 //Render elements from reading array
 const renderReadings = () => {
-  
+  //Clear list before rendering
+  readingsList.innerHTML = '';
+
   for(let i = 0; i < readings.length; i++) {
     const reading = readings[i];
     renderReadingElement(reading);
@@ -324,6 +326,7 @@ const submitForm = (event) => {
     readings.push(newReading);
     closeModal();
     removeValidationInfo();
+    form.reset();
     renderReadings();
   } 
 };
