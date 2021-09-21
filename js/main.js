@@ -165,6 +165,8 @@ const renderReadingElement = (reading) => {
 const renderReadings = () => {
   //Clear list before rendering
   readingsList.innerHTML = '';
+  //Sort readings by date
+  readings.sort((a, b) => b.millidate - a.millidate );
 
   for(let i = 0; i < readings.length; i++) {
     const reading = readings[i];
@@ -388,8 +390,8 @@ const cancelNewReading = (event) => {
 
 // Test button - temporary
 const test = () => {
-  
-  renderReadings();
+  console.log('test');
+  readings.sort((a, b) => b.millidate - a.millidate );
 }
 
 //Event listeners 
