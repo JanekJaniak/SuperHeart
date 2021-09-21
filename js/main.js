@@ -36,30 +36,41 @@ const readings =[
 
 //Get data from server using XMLHttpRequest
 const sendRequest = (method, url) => {
-  const promise = new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
+  // const promise = new Promise((resolve, reject) => {
+  //   const xhr = new XMLHttpRequest();
   
-    xhr.open(method, url);
-    xhr.responseType = 'json'; // Parse automatically
+  //   xhr.open(method, url);
+  //   xhr.responseType = 'json'; // Parse automatically
 
-    xhr.onload = () => {
-      if(xhr.status >= 200 && xhr.status <= 300) {
-        resolve(xhr.response);
-      } else {
-        reject(new Error(
-          `Server error: Status: ${xhr.status} Message: ${xhr.statusText}`
-        ));
-      }
-    };
+  //   xhr.onload = () => {
+  //     if(xhr.status >= 200 && xhr.status <= 300) {
+  //       resolve(xhr.response);
+  //     } else {
+  //       reject(new Error(
+  //         `Server error: Status: ${xhr.status} Message: ${xhr.statusText}`
+  //       ));
+  //     }
+  //   };
 
-    xhr.onerror = () => {
-      reject(new Error('No internet connection'));
-    };
+  //   xhr.onerror = () => {
+  //     reject(new Error('Client side error'));
+  //   };
 
-    xhr.send();
-  });
-  return promise;
-};
+  //   xhr.send();
+  // });
+  // return promise;
+  return fetch(url)
+    .then(response => {
+      if(response.status >= 200 && response.status < 300) {
+        return response.json();
+      } else  {
+          throw new Error(`Server error. Status: ${response.status} Message: ${response.statusText}`);
+        }
+    })
+    .catch(error => {
+      throw new Error(error);
+    })
+}
 
 async function getData() {
   try {
@@ -71,6 +82,7 @@ async function getData() {
     responseData.map(reading => readings.push(reading));
 
     readingsError.innerHTML = '';
+
     renderReadings();
   } catch (error) {
     console.log(error.message);
