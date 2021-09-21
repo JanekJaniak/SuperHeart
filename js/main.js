@@ -1,7 +1,8 @@
 // Reading class
 class Reading {
-  constructor(id, date, time, systolic, diastolic, heartrate, stress) {
+  constructor(id, millidate, date, time, systolic, diastolic, heartrate, stress) {
     this.id = id;
+    this.millidate = millidate;
     this.date = date;
     this.time = time;
     this.systolic = systolic;
@@ -20,11 +21,13 @@ const addReadingBtn = document.querySelector('.readings--add-button');
 const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
 const modal = document.querySelector('.modal');
 const backdrop = document.querySelector('.backdrop');
+const testBtn = document.querySelector('.test-button')
 
 //Readings array
-const readings =[
+let readings =[
   {
     id: 100,
+    millidate: 1632316200000,
     date: "2021-09-22",
     time: "15:10",
     systolic: 120,
@@ -346,24 +349,33 @@ const removeValidationInfo = () => {
 //Submit form
 const submitForm = (event) => {
   event.preventDefault();
+  
+  const fullDate = (date, time) => {
+    const concatDate = date.concat('T',time);
+    const fullDate = new Date(concatDate);
+    const millisecDate = fullDate.getTime();
+
+    return millisecDate;
+  };
 
   if(isFromValid()) {
     let newReading = new Reading(
       '_' + Math.random().toString(36).substr(2, 9),
+      fullDate(date.value, time.value),
       date.value,
       time.value,
-      systolic.value,
-      diastolic.value,
-      heartrate.value,
-      stress.value
-    )
-    
+      parseInt(systolic.value),
+      parseInt(diastolic.value),
+      parseInt(heartrate.value),
+      parseInt(stress.value)
+    );
+
     readings.push(newReading);
     closeModal();
     removeValidationInfo();
     form.reset();
     renderReadings();
-  } 
+  }
 };
 
 //Cancel new reading
@@ -374,11 +386,19 @@ const cancelNewReading = (event) => {
   form.reset();
 };
 
+// Test button - temporary
+const test = () => {
+  
+  renderReadings();
+}
+
 //Event listeners 
 addReadingBtn.addEventListener('click', openModal);
 form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
+
+testBtn.addEventListener('click', test)
 
 getData();
