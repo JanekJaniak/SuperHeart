@@ -63,16 +63,12 @@ const sendRequest = (method, url) => {
     .then(response => {
       if(response.status >= 200 && response.status < 300) {
         return response.json();
-      } else {
-        return response.json().then(errorData => {
-          console.log('Server error log', errorData);
-          throw new Error(`Server error:`)
-        })
-      }
+      } else  {
+          throw new Error(`Server error. Status: ${response.status} Message: ${response.statusText}`);
+        }
     })
     .catch(error => {
-      console.log('last catch error', error);
-      throw new Error('Client side error');
+      throw new Error(error);
     })
 }
 
@@ -80,12 +76,13 @@ async function getData() {
   try {
     const responseData = await sendRequest(
       'GET', 
-      'http://janjaniak.pl/AppsData/SuperHeart/eadingsData.json'
+      'http://janjaniak.pl/AppsData/SuperHeart/readingsData.json'
     );
 
     responseData.map(reading => readings.push(reading));
 
     readingsError.innerHTML = '';
+
     renderReadings();
   } catch (error) {
     console.log(error.message);
