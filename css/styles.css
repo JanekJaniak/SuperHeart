@@ -41,7 +41,7 @@ small {
 .invisible {
   visibility: hidden; }
 
-.modal {
+.new-reading-modal {
   display: none;
   position: fixed;
   top: 45%;

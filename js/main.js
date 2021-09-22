@@ -19,7 +19,7 @@ const readingsError = document.querySelector('.readings--error');
 //Selectors for buttons and backdrop
 const addReadingBtn = document.querySelector('.readings--add-button');
 const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
-const modal = document.querySelector('.modal');
+const newReadingModal = document.querySelector('.new-reading-modal');
 const backdrop = document.querySelector('.backdrop');
 const testBtn = document.querySelector('.test-button')
 
@@ -197,16 +197,16 @@ const setNowTimeAndDate = () => {
   time.value = getNowTime;
 };
 
-//Open modal 
-const openModal = () => {
-  modal.style.display = 'block';
+//Open newReadingModal 
+const openNewReadingModal = () => {
+  newReadingModal.style.display = 'block';
   backdrop.style.display = 'block';
   setNowTimeAndDate();
 };
 
-//Close modal
-const closeModal = () => {
-  modal.style.display = 'none';
+//Close newReadingModal
+const closeNewReadingModal = () => {
+  newReadingModal.style.display = 'none';
   backdrop.style.display = 'none';
 };
 
@@ -373,7 +373,7 @@ const submitForm = (event) => {
     );
 
     readings.push(newReading);
-    closeModal();
+    closeNewReadingModal();
     removeValidationInfo();
     form.reset();
     renderReadings();
@@ -384,7 +384,7 @@ const submitForm = (event) => {
 const cancelNewReading = (event) => {
   event.preventDefault();
   removeValidationInfo();
-  closeModal();
+  closeNewReadingModal();
   form.reset();
 };
 
@@ -395,7 +395,7 @@ const test = () => {
 }
 
 //Event listeners 
-addReadingBtn.addEventListener('click', openModal);
+addReadingBtn.addEventListener('click', openNewReadingModal);
 form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
