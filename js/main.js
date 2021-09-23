@@ -21,7 +21,8 @@ const addReadingBtn = document.querySelector('.readings--add-button');
 const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
 const newReadingModal = document.querySelector('.new-reading-modal');
 const backdrop = document.querySelector('.backdrop');
-const testBtn = document.querySelector('.test-button')
+const statsBtn = document.querySelector('.main-btn--stats')
+const testBtn = document.querySelector('.main-btn--test')
 
 //Readings array
 let readings =[
@@ -388,6 +389,12 @@ const cancelNewReading = (event) => {
   form.reset();
 };
 
+//Stats modal
+const openStats = () => {
+  console.log('STATS');
+  
+}
+
 // Test button - temporary
 const test = () => {
   console.log('test');
@@ -400,6 +407,7 @@ form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
+statsBtn.addEventListener('click', openStats)
 
 testBtn.addEventListener('click', test)
 
