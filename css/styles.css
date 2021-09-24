@@ -275,7 +275,9 @@ button {
   .average--btn {
     margin-top: 30px;
     background-color: #c50000;
-    color: white; }
+    font-weight: 600;
+    color: white;
+    box-shadow: inset 3px 3px 5px rgba(250, 250, 250, 0.5), 3px 3px 5px 0px rgba(0, 0, 0, 0.5); }
     .average--btn:hover {
       cursor: pointer;
       transition: background-color 0.5s ease-out;

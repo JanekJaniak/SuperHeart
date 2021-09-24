@@ -21,8 +21,10 @@ const addReadingBtn = document.querySelector('.readings--add-button');
 const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
 const newReadingModal = document.querySelector('.new-reading-modal');
 const backdrop = document.querySelector('.backdrop');
-const statsBtn = document.querySelector('.main-btn--stats')
-const testBtn = document.querySelector('.main-btn--test')
+const statsBtn = document.querySelector('.main-btn--stats');
+const testBtn = document.querySelector('.main-btn--test');
+const averageModal = document.querySelector('.average');
+const averageBtnClose = document.querySelector('.average--btn--close');
 
 //Readings array
 let readings =[
@@ -206,8 +208,9 @@ const openNewReadingModal = () => {
 };
 
 //Close newReadingModal
-const closeNewReadingModal = () => {
+const closeModals = () => {
   newReadingModal.style.display = 'none';
+  averageModal.style.display = 'none';
   backdrop.style.display = 'none';
 };
 
@@ -374,7 +377,7 @@ const submitForm = (event) => {
     );
 
     readings.push(newReading);
-    closeNewReadingModal();
+    closeModals();
     removeValidationInfo();
     form.reset();
     renderReadings();
@@ -385,14 +388,19 @@ const submitForm = (event) => {
 const cancelNewReading = (event) => {
   event.preventDefault();
   removeValidationInfo();
-  closeNewReadingModal();
+  closeModals();
   form.reset();
 };
 
 //Stats modal
 const openStats = () => {
+  averageModal.style.display = 'block'
+  backdrop.style.display = 'block'
   console.log('STATS');
-  
+}
+
+const closeStats = () => {
+  closeModals();
 }
 
 // Test button - temporary
@@ -407,7 +415,8 @@ form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
-statsBtn.addEventListener('click', openStats)
+statsBtn.addEventListener('click', openStats);
+averageBtnClose.addEventListener('click', closeStats);
 
 testBtn.addEventListener('click', test)
 
