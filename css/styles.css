@@ -91,7 +91,7 @@ small {
       background-color: #F51010; }
 
 .average {
-  display: none;
+  display: block;
   position: fixed;
   top: 45%;
   left: 50%;

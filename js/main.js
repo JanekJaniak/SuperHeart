@@ -410,21 +410,22 @@ const showAvg = () => {
   const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)]
 
   const calcAvg = (arr) => {
-    const keys = [systolic, diastolic, heartrate, stress]
+    const keys = ['systolic', 'diastolic', 'heartrate', 'stress']
     
-    const getValue = (arr) => arr.systolic
-    const allValues = arr.map(getValue);
-    const sumValues = allValues.reduce((acc, cur) => acc + cur )
-    const averageValue = Math.round(sumValues / arr.length);
+    keys.forEach(key => {
 
-    console.log(sumValues, averageValue);
+      const allValues = arr.map(el => el[key]);
+      const sumValues = allValues.reduce((acc, cur) => acc + cur )
+      const averageValue = Math.round(sumValues / arr.length);
+  
+      console.log(sumValues, averageValue);
+    })
   }
 
   readingsCalculated.forEach((arr, i) => {
     calcAvg(arr)
     console.log(i);
   })
-
 
   console.log('clacAvg');
   
