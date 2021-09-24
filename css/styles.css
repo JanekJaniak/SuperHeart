@@ -1,7 +1,7 @@
 h3 {
   margin-top: 0;
   color: #2274A5;
-  font-weight: 400; }
+  font-weight: 600; }
 
 input {
   box-sizing: border-box;
@@ -44,6 +44,8 @@ small {
 
 .new-reading-modal {
   display: none;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   top: 45%;
   left: 50%;
@@ -73,8 +75,7 @@ small {
 .new-reading-btn {
   width: 100px;
   box-sizing: border-box;
-  cursor: pointer;
-  box-shadow: inset 3px 3px 5px rgba(250, 250, 250, 0.5), 3px 3px 5px 0px rgba(0, 0, 0, 0.5); }
+  cursor: pointer; }
   .new-reading-btn--save {
     background-color: #4ead41; }
     .new-reading-btn--save:hover {
@@ -91,14 +92,16 @@ small {
       background-color: #F51010; }
 
 .average {
-  display: block;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
   position: fixed;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #f3f3f3;
-  height: 300px;
-  width: 600px;
+  height: 400px;
+  width: 650px;
   margin: auto;
   border: 1px solid #b8b8b8;
   border-radius: 10px;
@@ -109,15 +112,24 @@ small {
   .average--heading {
     margin-bottom: 30px; }
   .average--btn {
-    margin-top: 30px;
-    background-color: #c50000;
-    font-weight: 600;
-    color: white;
+    width: 100px;
+    box-sizing: border-box;
+    cursor: pointer;
     box-shadow: inset 3px 3px 5px rgba(250, 250, 250, 0.5), 3px 3px 5px 0px rgba(0, 0, 0, 0.5); }
-    .average--btn:hover {
-      cursor: pointer;
-      transition: background-color 0.5s ease-out;
-      background-color: #F51010; }
+    .average--btn--save {
+      background-color: #4ead41; }
+      .average--btn--save:hover {
+        cursor: pointer;
+        transition: background-color 0.5s ease-out;
+        background-color: #77CC6A; }
+    .average--btn--cancel {
+      background-color: #c50000;
+      color: white;
+      margin-left: 15px; }
+      .average--btn--cancel:hover {
+        cursor: pointer;
+        transition: background-color 0.5s ease-out;
+        background-color: #F51010; }
 
 .table {
   width: 100%;

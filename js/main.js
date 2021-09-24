@@ -24,7 +24,7 @@ const backdrop = document.querySelector('.backdrop');
 const statsBtn = document.querySelector('.main-btn--stats');
 const testBtn = document.querySelector('.main-btn--test');
 const averageModal = document.querySelector('.average');
-const averageBtnClose = document.querySelector('.average--btn--close');
+const averageBtnClose = document.querySelector('.average--btn--cancel');
 
 //Readings array
 let readings =[
@@ -202,7 +202,7 @@ const setNowTimeAndDate = () => {
 
 //Open newReadingModal 
 const openNewReadingModal = () => {
-  newReadingModal.style.display = 'block';
+  newReadingModal.style.display = 'flex';
   backdrop.style.display = 'block';
   setNowTimeAndDate();
 };
@@ -394,42 +394,58 @@ const cancelNewReading = (event) => {
 
 //Stats modal
 const openStats = () => {
-  averageModal.style.display = 'block'
+  averageModal.style.display = 'flex'
   backdrop.style.display = 'block'
+  showAvg();
   console.log('STATS');
 };
 
 const closeStats = () => {
-  showAvg();
-  // closeModals();
+  closeModals();
 };
 
 // Calculate average values of readings
 const calcAvg = (arr) => {
   const keys = ['systolic', 'diastolic', 'heartrate', 'stress'];
   const avgValues = [];
-  keys.forEach(key => {
 
+  keys.forEach(key => {
     const allValues = arr.map(el => el[key]);
     const sumValues = allValues.reduce((acc, cur) => acc + cur );
     const avgValue = Math.round(sumValues / arr.length);
 
     avgValues.push(avgValue);
   });
-  return avgValues;
+
+  const avgReading = new Reading(
+    '_' + Math.random().toString(36).substr(2, 9),
+    Date.now(),
+    '',
+    '',
+    avgValues[0],
+    avgValues[1],
+    avgValues[2],
+    avgValues[3]
+  )
+
+  return avgReading;
 };
 
+// Calculate average values of readings
 const showAvg = () => {
   const firstRowElem = document.querySelector('.first-row-elem');
   const secRowElem = document.querySelector('.sec-row-elem');
   const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)];
   const avgReadingValues = [];
+  const avgReadingElem = [firstRowElem, secRowElem]
 
-  
+  readingsCalculated.forEach(arr => avgReadingValues.push(calcAvg(arr)));
 
-  readingsCalculated.forEach((arr) => {
-    avgReadingValues.push([calcAvg(arr)]);
-    console.log(avgReadingValues);
+  avgReadingElem.forEach((arr, i) => {
+    arr.innerText = avgReadingValues[i].heartrate;
+    arr.previousElementSibling.innerText = 
+      `${avgReadingValues[i].systolic} / ${avgReadingValues[i].diastolic}`;
+    arr.nextElementSibling.innerText = avgReadingValues[i].stress;
   });
 };
 
