@@ -404,31 +404,33 @@ const closeStats = () => {
   // closeModals();
 };
 
+// Calculate average values of readings
+const calcAvg = (arr) => {
+  const keys = ['systolic', 'diastolic', 'heartrate', 'stress'];
+  const avgValues = [];
+  keys.forEach(key => {
+
+    const allValues = arr.map(el => el[key]);
+    const sumValues = allValues.reduce((acc, cur) => acc + cur );
+    const avgValue = Math.round(sumValues / arr.length);
+
+    avgValues.push(avgValue);
+  });
+  return avgValues;
+};
+
 const showAvg = () => {
   const firstRowElem = document.querySelector('.first-row-elem');
   const secRowElem = document.querySelector('.sec-row-elem');
-  const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)]
+  const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)];
+  const avgReadingValues = [];
 
-  const calcAvg = (arr) => {
-    const keys = ['systolic', 'diastolic', 'heartrate', 'stress']
-    
-    keys.forEach(key => {
-
-      const allValues = arr.map(el => el[key]);
-      const sumValues = allValues.reduce((acc, cur) => acc + cur )
-      const averageValue = Math.round(sumValues / arr.length);
   
-      console.log(sumValues, averageValue);
-    })
-  }
 
-  readingsCalculated.forEach((arr, i) => {
-    calcAvg(arr)
-    console.log(i);
-  })
-
-  console.log('clacAvg');
-  
+  readingsCalculated.forEach((arr) => {
+    avgReadingValues.push([calcAvg(arr)]);
+    console.log(avgReadingValues);
+  });
 };
 
 // Test button - temporary
