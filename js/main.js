@@ -33,10 +33,10 @@ let readings =[
     millidate: 1632316200000,
     date: "2021-09-22",
     time: "15:10",
-    systolic: 120,
-    diastolic: 80,
-    heartrate: 70,
-    stress: 1
+    systolic: 170,
+    diastolic: 121,
+    heartrate: 104,
+    stress: 3
   }
 ];
 
@@ -397,17 +397,43 @@ const openStats = () => {
   averageModal.style.display = 'block'
   backdrop.style.display = 'block'
   console.log('STATS');
-}
+};
 
 const closeStats = () => {
-  closeModals();
-}
+  showAvg();
+  // closeModals();
+};
+
+const showAvg = () => {
+  const firstRowElem = document.querySelector('.first-row-elem');
+  const secRowElem = document.querySelector('.sec-row-elem');
+  const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)]
+
+  const calcAvg = (arr) => {
+    const keys = [systolic, diastolic, heartrate, stress]
+    
+    const getValue = (arr) => arr.systolic
+    const allValues = arr.map(getValue);
+    const sumValues = allValues.reduce((acc, cur) => acc + cur )
+    const averageValue = Math.round(sumValues / arr.length);
+
+    console.log(sumValues, averageValue);
+  }
+
+  readingsCalculated.forEach((arr, i) => {
+    calcAvg(arr)
+    console.log(i);
+  })
+
+
+  console.log('clacAvg');
+  
+};
 
 // Test button - temporary
 const test = () => {
   console.log('test');
-  readings.sort((a, b) => b.millidate - a.millidate );
-}
+};
 
 //Event listeners 
 addReadingBtn.addEventListener('click', openNewReadingModal);

@@ -1,5 +1,6 @@
 @import variables
 @import newReadingModal
+@import averageModal
 
 body
   background-color: $grey-dark
@@ -160,42 +161,3 @@ button
   box-shadow: $inner-sh
   background-color: $grey-input
 
-.table
-  width: 100%
-  height: 50%
-  border-collapse: collapse
-  &--tr
-    border-bottom: $border
-    &--head
-      border-bottom: $border-wide
-  &--td-mid
-    border-right: $border
-
-.average
-  display: none
-  position: fixed
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: $grey-light
-  height: 300px
-  width: 600px
-  margin: auto
-  border: $border
-  border-radius: $rad
-  box-sizing: border-box
-  box-shadow: $outer-sh
-  text-align: center
-  padding: $p-pri
-  &--heading
-    margin-bottom: $air
-  &--btn
-    margin-top: $air
-    background-color: $red
-    font-weight: 600
-    color: white
-    box-shadow: $sml-btn-sh
-    &:hover
-      cursor: pointer
-      transition: background-color 0.5s ease-out
-      background-color: $red-light
