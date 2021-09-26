@@ -395,8 +395,8 @@ const cancelNewReading = (event) => {
 
 //Stats modal
 const openStats = () => {
-  averageModal.style.display = 'flex'
-  backdrop.style.display = 'block'
+  averageModal.style.display = 'flex';
+  backdrop.style.display = 'block';
   showAvg();
 };
 
