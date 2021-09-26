@@ -1,5 +1,6 @@
 @import variables
-@import modal
+@import newReadingModal
+@import averageModal
 
 body
   background-color: $grey-dark
@@ -62,16 +63,35 @@ button
   height: 700px
   // position: relative
   &--nav
-    height: 60px
-    width: 100%
-    background-color: $grey-light
-    box-sizing: border-box
-    // position: absolute
-    bottom: 0
-    border-top: $border
-    margin-top: $air
+    margin-top: $air-max
     display: flex
     justify-content: center
+
+.main-btn
+  height: 100px
+  width: 100px
+  font-weight: 600
+  border: none
+  box-sizing: border-box
+  border-radius: $rad
+  box-shadow: $main-btn-sh
+  &--stats
+    background-color: $blue
+    color: white
+    &:hover
+      cursor: pointer
+      transition: background-color 0.5s ease-out
+      background-color: $blue-light
+  &--test
+    margin-left: $m-mid
+
+  .icon
+    background-image: url("/img/chart.PNG")
+    height: 60px
+    opacity: 60%
+    width: 60px
+    display: inline-block
+    margin-bottom: 3px
 
 //Readings
 .readings
@@ -91,6 +111,7 @@ button
     font-weight: 500
     color: $blue
   &--display
+    font-style: italic
     height: 420px
     box-sizing: border-box
     border: $border-wide
@@ -98,14 +119,15 @@ button
     box-shadow: $inner-sh
   &--error
     &--txt
-      margin-top: 150px;
-      color: red;
-      font-weight: bold;
+      margin-top: 150px
+      color: red
+      font-weight: bold
   &--add-button
     background-color: $red
     font-weight: 600
     color: white
     margin-top: $air
+    box-shadow: $sml-btn-sh
     &:hover
       cursor: pointer
       transition: background-color 0.5s ease-out
@@ -139,3 +161,4 @@ button
   padding: $p-sec
   box-shadow: $inner-sh
   background-color: $grey-input
+

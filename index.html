@@ -29,10 +29,10 @@
         <button class="readings--add-button">ADD</button>
       </div>
       <nav class="main-app--nav">
-        <button class="test-button">TEST</button>
+        <button class="main-btn main-btn--stats"><div class="icon"></div>STATS</button>
       </nav>
     </div>
-    <div class="modal">
+    <div class="new-reading-modal">
       <h3  class="new-reading-heading">NEW READING</h2>
       <div class="new-reading">
         <form class="new-reading-inputs--form">
@@ -90,6 +90,38 @@
             <button class="new-reading-btn new-reading-btn--cancel">CANCEL</button>
           </div>
         </form>
+      </div>
+    </div>
+    <div class="average">
+      <h3 class="average--heading">AVERGE OF READINGS</h3>
+      <table class="table">
+        <thead>
+          <tr class="table--tr--head">
+            <th class="table--td-mid">Average of last</th>
+            <th class="table--td-mid">Pressure</th>
+            <th class="table--td-mid">Heart rate</th>
+            <th>Stress</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table--tr">
+            <td class="table--td-mid">7 days</td>
+            <td class="table--td-mid"></td>
+            <td class="table--td-mid first-row-elem"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="table--td-mid">3 days</td>
+            <td class="table--td-mid "></td>
+            <td class="table--td-mid sec-row-elem"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="average--message">Everything is great!</p>
+      <div class="average-controls">
+        <button class="average--btn average--btn--save">SAVE</button>
+        <button class="average--btn average--btn--cancel">CLOSE</button>
       </div>
     </div>
   </main>

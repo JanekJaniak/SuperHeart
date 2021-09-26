@@ -1,6 +1,7 @@
 h3
   margin-top: 0
   color: $blue
+  font-weight: 600
 
 input
   box-sizing: border-box
@@ -41,12 +42,14 @@ small
 .invisible
   visibility: hidden
 
-.modal
+.new-reading-modal
   display: none
+  flex-direction: column
+  justify-content: space-between
   position: fixed
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 45%
+  left: 50%
+  transform: translate(-50%, -50%)
   background-color: $grey-light
   height: 560px
   width: 300px

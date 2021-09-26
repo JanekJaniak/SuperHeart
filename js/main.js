@@ -1,6 +1,6 @@
 // Reading class
 class Reading {
-  constructor(id, millidate, date, time, systolic, diastolic, heartrate, stress) {
+  constructor(id, millidate, date, time, systolic, diastolic, heartrate, stress, risk) {
     this.id = id;
     this.millidate = millidate;
     this.date = date;
@@ -9,6 +9,7 @@ class Reading {
     this.diastolic = diastolic;
     this.heartrate = heartrate;
     this.stress = stress;
+    this.risk = risk;
   }
 }
 
@@ -19,9 +20,12 @@ const readingsError = document.querySelector('.readings--error');
 //Selectors for buttons and backdrop
 const addReadingBtn = document.querySelector('.readings--add-button');
 const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
-const modal = document.querySelector('.modal');
+const newReadingModal = document.querySelector('.new-reading-modal');
 const backdrop = document.querySelector('.backdrop');
-const testBtn = document.querySelector('.test-button')
+const statsBtn = document.querySelector('.main-btn--stats');
+const averageModal = document.querySelector('.average');
+const averageBtnClose = document.querySelector('.average--btn--cancel');
+const averageBtnSave = document.querySelector('.average--btn--save');
 
 //Readings array
 let readings =[
@@ -30,10 +34,11 @@ let readings =[
     millidate: 1632316200000,
     date: "2021-09-22",
     time: "15:10",
-    systolic: 120,
-    diastolic: 80,
-    heartrate: 70,
-    stress: 1
+    systolic: 170,
+    diastolic: 121,
+    heartrate: 104,
+    stress: 3,
+    risk: 2
   }
 ];
 
@@ -150,7 +155,6 @@ const renderReadingElement = (reading) => {
   
   readingsList.appendChild(newLiElement);
 
-  //APPEND MULTIPLE !!!
   newLiElement.appendChild(elementHeading);
   elementHeading.appendChild(headingDate);
   elementHeading.appendChild(headingTime);
@@ -197,16 +201,17 @@ const setNowTimeAndDate = () => {
   time.value = getNowTime;
 };
 
-//Open modal 
-const openModal = () => {
-  modal.style.display = 'block';
+//Open newReadingModal 
+const openNewReadingModal = () => {
+  newReadingModal.style.display = 'flex';
   backdrop.style.display = 'block';
   setNowTimeAndDate();
 };
 
-//Close modal
-const closeModal = () => {
-  modal.style.display = 'none';
+//Close newReadingModal
+const closeModals = () => {
+  newReadingModal.style.display = 'none';
+  averageModal.style.display = 'none';
   backdrop.style.display = 'none';
 };
 
@@ -373,7 +378,7 @@ const submitForm = (event) => {
     );
 
     readings.push(newReading);
-    closeModal();
+    closeModals();
     removeValidationInfo();
     form.reset();
     renderReadings();
@@ -384,23 +389,110 @@ const submitForm = (event) => {
 const cancelNewReading = (event) => {
   event.preventDefault();
   removeValidationInfo();
-  closeModal();
+  closeModals();
   form.reset();
 };
 
-// Test button - temporary
-const test = () => {
-  console.log('test');
-  readings.sort((a, b) => b.millidate - a.millidate );
+//Stats modal
+const openStats = () => {
+  averageModal.style.display = 'flex';
+  backdrop.style.display = 'block';
+  showAvg();
+};
+
+const closeStats = () => {
+  closeModals();
+};
+
+const saveAverage = () => {
+  console.log('Save average');
+  closeModals();
 }
 
+// Calculate average values of readings
+const calcAvg = (arr) => {
+  const keys = ['systolic', 'diastolic', 'heartrate', 'stress'];
+  const avgValues = [];
+  
+  keys.forEach(key => {
+    const allValues = arr.map(el => el[key]);
+    const sumValues = allValues.reduce((acc, cur) => acc + cur );
+    const avgValue = Math.round(sumValues / arr.length);
+    
+    avgValues.push(avgValue);
+  });
+  
+  //Check risk value 
+  const risk = () => {
+    if(avgValues.every(el => el < 130)) {
+      return 0;
+    } else if(avgValues.some(el => el >= 130) && avgValues.every(el => el < 145)) {
+      return 1;
+    } else {
+      return 2;
+    }
+  };
+
+  const avgReading = new Reading(
+    '_' + Math.random().toString(36).substr(2, 9),
+    Date.now(),
+    '',
+    '',
+    avgValues[0],
+    avgValues[1],
+    avgValues[2],
+    avgValues[3],
+    risk()
+  )
+  return avgReading;
+};
+
+// Show average readings in table
+const showAvg = () => {
+  const firstRowElem = document.querySelector('.first-row-elem');
+  const secRowElem = document.querySelector('.sec-row-elem');
+  const message = document.querySelector('.average--message');
+  const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)];
+  const avgReadingValues = [];
+  const avgReadingElem = [firstRowElem, secRowElem];
+
+  readingsCalculated.forEach(arr => avgReadingValues.push(calcAvg(arr)));
+
+  avgReadingElem.forEach((arr, i) => {
+    arr.innerText = avgReadingValues[i].heartrate;
+    arr.previousElementSibling.innerText = 
+      `${avgReadingValues[i].systolic} / ${avgReadingValues[i].diastolic}`;
+    arr.nextElementSibling.innerText = avgReadingValues[i].stress;
+
+    if(avgReadingValues[i].risk === 0) {
+      arr.parentElement.classList.add('risk--low');
+
+    } else if(avgReadingValues[i].risk === 2) {
+      arr.parentElement.classList.add('risk--high');
+
+      message.innerText = 'You should visit a doctor! Show him this table.';
+      message.classList.add('risk--high')
+      
+    } else {
+      arr.parentElement.classList.add('risk--mid');
+
+      if(!message.classList.contains('risk--high')){
+        message.innerText = 'Be carefull! Keep measuring Your pressure';
+        message.classList.add('risk--mid');
+      }
+    }
+  });
+};
+
 //Event listeners 
-addReadingBtn.addEventListener('click', openModal);
+addReadingBtn.addEventListener('click', openNewReadingModal);
 form.addEventListener('submit', submitForm);
 form.addEventListener('input', realtimeValidation);
 cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
+statsBtn.addEventListener('click', openStats);
+averageBtnClose.addEventListener('click', closeStats);
+averageBtnSave.addEventListener('click', saveAverage);
 
-testBtn.addEventListener('click', test)
 
 getData();
