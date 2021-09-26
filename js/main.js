@@ -1,6 +1,6 @@
 // Reading class
 class Reading {
-  constructor(id, millidate, date, time, systolic, diastolic, heartrate, stress) {
+  constructor(id, millidate, date, time, systolic, diastolic, heartrate, stress, risk) {
     this.id = id;
     this.millidate = millidate;
     this.date = date;
@@ -9,6 +9,7 @@ class Reading {
     this.diastolic = diastolic;
     this.heartrate = heartrate;
     this.stress = stress;
+    this.risk = risk;
   }
 }
 
@@ -36,7 +37,8 @@ let readings =[
     systolic: 170,
     diastolic: 121,
     heartrate: 104,
-    stress: 3
+    stress: 3,
+    risk: 2
   }
 ];
 
@@ -408,14 +410,25 @@ const closeStats = () => {
 const calcAvg = (arr) => {
   const keys = ['systolic', 'diastolic', 'heartrate', 'stress'];
   const avgValues = [];
-
+  
   keys.forEach(key => {
     const allValues = arr.map(el => el[key]);
     const sumValues = allValues.reduce((acc, cur) => acc + cur );
     const avgValue = Math.round(sumValues / arr.length);
-
+    
     avgValues.push(avgValue);
   });
+  
+  //Check risk value 
+  const risk = () => {
+    if(avgValues.every(el => el < 130)) {
+      return 0;
+    } else if(avgValues.some(el => el >= 130) && avgValues.every(el => el < 145)) {
+      return 1;
+    } else {
+      return 2;
+    }
+  };
 
   const avgReading = new Reading(
     '_' + Math.random().toString(36).substr(2, 9),
@@ -425,9 +438,10 @@ const calcAvg = (arr) => {
     avgValues[0],
     avgValues[1],
     avgValues[2],
-    avgValues[3]
+    avgValues[3],
+    risk()
   )
-
+    console.log(avgReading);
   return avgReading;
 };
 
