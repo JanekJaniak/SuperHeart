@@ -23,9 +23,9 @@ const cancelNewReadingBtn = document.querySelector('.new-reading-btn--cancel');
 const newReadingModal = document.querySelector('.new-reading-modal');
 const backdrop = document.querySelector('.backdrop');
 const statsBtn = document.querySelector('.main-btn--stats');
-const testBtn = document.querySelector('.main-btn--test');
 const averageModal = document.querySelector('.average');
 const averageBtnClose = document.querySelector('.average--btn--cancel');
+const averageBtnSave = document.querySelector('.average--btn--save');
 
 //Readings array
 let readings =[
@@ -155,7 +155,6 @@ const renderReadingElement = (reading) => {
   
   readingsList.appendChild(newLiElement);
 
-  //APPEND MULTIPLE !!!
   newLiElement.appendChild(elementHeading);
   elementHeading.appendChild(headingDate);
   elementHeading.appendChild(headingTime);
@@ -399,12 +398,16 @@ const openStats = () => {
   averageModal.style.display = 'flex'
   backdrop.style.display = 'block'
   showAvg();
-  console.log('STATS');
 };
 
 const closeStats = () => {
   closeModals();
 };
+
+const saveAverage = () => {
+  console.log('Save average');
+  closeModals();
+}
 
 // Calculate average values of readings
 const calcAvg = (arr) => {
@@ -441,17 +444,17 @@ const calcAvg = (arr) => {
     avgValues[3],
     risk()
   )
-    console.log(avgReading);
   return avgReading;
 };
 
-// Calculate average values of readings
+// Show average readings in table
 const showAvg = () => {
   const firstRowElem = document.querySelector('.first-row-elem');
   const secRowElem = document.querySelector('.sec-row-elem');
+  const message = document.querySelector('.average--message');
   const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)];
   const avgReadingValues = [];
-  const avgReadingElem = [firstRowElem, secRowElem]
+  const avgReadingElem = [firstRowElem, secRowElem];
 
   readingsCalculated.forEach(arr => avgReadingValues.push(calcAvg(arr)));
 
@@ -460,12 +463,25 @@ const showAvg = () => {
     arr.previousElementSibling.innerText = 
       `${avgReadingValues[i].systolic} / ${avgReadingValues[i].diastolic}`;
     arr.nextElementSibling.innerText = avgReadingValues[i].stress;
-  });
-};
 
-// Test button - temporary
-const test = () => {
-  console.log('test');
+    if(avgReadingValues[i].risk === 0) {
+      arr.parentElement.classList.add('risk--low');
+
+    } else if(avgReadingValues[i].risk === 2) {
+      arr.parentElement.classList.add('risk--high');
+
+      message.innerText = 'You should visit a doctor! Show him this table.';
+      message.classList.add('risk--high')
+      
+    } else {
+      arr.parentElement.classList.add('risk--mid');
+
+      if(!message.classList.contains('risk--high')){
+        message.innerText = 'Be carefull! Keep measuring Your pressure';
+        message.classList.add('risk--mid');
+      }
+    }
+  });
 };
 
 //Event listeners 
@@ -476,7 +492,7 @@ cancelNewReadingBtn.addEventListener('click', cancelNewReading);
 backdrop.addEventListener('click', cancelNewReading);
 statsBtn.addEventListener('click', openStats);
 averageBtnClose.addEventListener('click', closeStats);
+averageBtnSave.addEventListener('click', saveAverage);
 
-testBtn.addEventListener('click', test)
 
 getData();

@@ -130,17 +130,31 @@ small {
         cursor: pointer;
         transition: background-color 0.5s ease-out;
         background-color: #F51010; }
+  .average--message {
+    margin: 15px 0;
+    font-weight: bolder;
+    color: #4ead41; }
 
 .table {
   width: 100%;
   height: 50%;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  font-style: italic; }
   .table--tr {
     border-bottom: 1px solid #b8b8b8; }
     .table--tr--head {
       border-bottom: 2px solid #b8b8b8; }
   .table--td-mid {
     border-right: 1px solid #b8b8b8; }
+
+.risk--low {
+  color: #4ead41; }
+
+.risk--mid {
+  color: #FFBF00; }
+
+.risk--high {
+  color: #c50000; }
 
 body {
   background-color: #dfdfdf;
@@ -247,6 +261,7 @@ button {
     font-weight: 500;
     color: #2274A5; }
   .readings--display {
+    font-style: italic;
     height: 420px;
     box-sizing: border-box;
     border: 2px solid #b8b8b8;
