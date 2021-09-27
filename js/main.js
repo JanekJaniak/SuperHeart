@@ -147,11 +147,19 @@ const renderReadingElement = (reading) => {
       stressString = 'MID'
       break;
     case(3):
-      stressString = 'HIGH'
+      stressString = 'HIGH';
       break;
   }
 
   stressReading.innerText = stressString;
+
+  if(reading.systolic < 130 && reading.diastolic < 130 && reading.heartrate < 130) {
+    elementReadings.classList.add('risk--low')
+  } else if(reading.systolic > 145 || reading.diastolic > 145 || reading.heartrate > 145) {
+    elementReadings.classList.add('risk--high')
+  } else {
+    elementReadings.classList.add('risk--mid')
+  }
   
   readingsList.appendChild(newLiElement);
 
