@@ -241,7 +241,7 @@ const removeErrorMsg = (inputId) => {
   inputId.nextElementSibling.classList.add('invisible');
 };
 
-//Inputs Validation REAFCTOR !!!
+//Inputs Validation
 const isDateValid = () => {
   let isValid = false;
   
@@ -373,6 +373,16 @@ const submitForm = (event) => {
     return millisecDate;
   };
 
+  const risk = () => {
+    if(parseInt(systolic.value) < 130 && parseInt(diastolic.value) < 130 && parseInt(heartrate.value) <130) {
+      return 0
+    } else if(parseInt(systolic.value) > 145 || parseInt(diastolic.value) > 145 || parseInt(heartrate.value) > 145) {
+      return 2
+    } else {
+      return 1
+    }
+  };
+
   if(isFromValid()) {
     let newReading = new Reading(
       '_' + Math.random().toString(36).substr(2, 9),
@@ -382,7 +392,8 @@ const submitForm = (event) => {
       parseInt(systolic.value),
       parseInt(diastolic.value),
       parseInt(heartrate.value),
-      parseInt(stress.value)
+      parseInt(stress.value),
+      risk()
     );
 
     readings.push(newReading);
