@@ -141,10 +141,10 @@ const renderReadingElement = (reading) => {
 
   switch(reading.stress) {
     case(1):
-      stressString = 'LOW'
+      stressString = 'LOW';
       break;
     case(2):
-      stressString = 'MID'
+      stressString = 'MID';
       break;
     case(3):
       stressString = 'HIGH';
@@ -153,14 +153,18 @@ const renderReadingElement = (reading) => {
 
   stressReading.innerText = stressString;
 
-  if(reading.systolic < 130 && reading.diastolic < 130 && reading.heartrate < 130) {
-    elementReadings.classList.add('risk--low');
-  } else if(reading.systolic > 145 || reading.diastolic > 145 || reading.heartrate > 145) {
-    elementReadings.classList.add('risk--high');
-  } else {
-    elementReadings.classList.add('risk--mid');
+  switch(reading.risk) {
+    case(0):
+      elementReadings.classList.add('risk--low');
+      break;
+    case(1):
+      elementReadings.classList.add('risk--mid');
+      break;
+    case(2):
+      elementReadings.classList.add('risk--high');
+      break;
   }
-  
+ 
   readingsList.appendChild(newLiElement);
 
   newLiElement.appendChild(elementHeading);
@@ -241,7 +245,7 @@ const removeErrorMsg = (inputId) => {
   inputId.nextElementSibling.classList.add('invisible');
 };
 
-//Inputs Validation REAFCTOR !!!
+//Inputs Validation
 const isDateValid = () => {
   let isValid = false;
   
@@ -373,6 +377,16 @@ const submitForm = (event) => {
     return millisecDate;
   };
 
+  const risk = () => {
+    if(parseInt(systolic.value) < 130 && parseInt(diastolic.value) < 130 && parseInt(heartrate.value) <130) {
+      return 0
+    } else if(parseInt(systolic.value) > 140 || parseInt(diastolic.value) > 140 || parseInt(heartrate.value) > 140) {
+      return 2
+    } else {
+      return 1
+    }
+  };
+
   if(isFromValid()) {
     let newReading = new Reading(
       '_' + Math.random().toString(36).substr(2, 9),
@@ -382,7 +396,8 @@ const submitForm = (event) => {
       parseInt(systolic.value),
       parseInt(diastolic.value),
       parseInt(heartrate.value),
-      parseInt(stress.value)
+      parseInt(stress.value),
+      risk()
     );
 
     readings.push(newReading);
@@ -434,7 +449,7 @@ const calcAvg = (arr) => {
   const risk = () => {
     if(avgValues.every(el => el < 130)) {
       return 0;
-    } else if(avgValues.some(el => el >= 130) && avgValues.every(el => el < 145)) {
+    } else if(avgValues.some(el => el > 130) && avgValues.every(el => el < 140)) {
       return 1;
     } else {
       return 2;
