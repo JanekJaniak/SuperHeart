@@ -27,8 +27,6 @@ export const calcAvg = (arr) => {
   const avgReading = new Reading(
     '_' + Math.random().toString(36).substr(2, 9),
     Date.now(),
-    '',
-    '',
     avgValues[0],
     avgValues[1],
     avgValues[2],
