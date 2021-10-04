@@ -100,17 +100,19 @@ const cancelNewReading = (event) => {
   form.reset();
 };
 
-//Stats modal
+//Open stats modal
 const openStats = () => {
   averageModal.style.display = 'flex';
   backdrop.style.display = 'block';
   showAvg(readings);
 };
 
+//Close stats modal
 const closeStats = () => {
   closeModals();
 };
 
+//Save average
 const saveAverage = () => {
   console.log('Save average');
   closeModals();
