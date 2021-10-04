@@ -165,8 +165,6 @@ export const submitForm = (event) => {
     let newReading = new Reading(
       '_' + Math.random().toString(36).substr(2, 9),
       fullDate(date.value, time.value),
-      date.value,
-      time.value,
       parseInt(systolic.value),
       parseInt(diastolic.value),
       parseInt(heartrate.value),

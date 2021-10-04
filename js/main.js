@@ -7,11 +7,9 @@ import { closeModals } from './Components/Helpers/closeModals.js';
 
 // Reading class
 export class Reading {
-  constructor(id, millidate, date, time, systolic, diastolic, heartrate, stress, risk) {
+  constructor(id, millidate, systolic, diastolic, heartrate, stress, risk) {
     this.id = id;
     this.millidate = millidate;
-    this.date = date;
-    this.time = time;
     this.systolic = systolic;
     this.diastolic = diastolic;
     this.heartrate = heartrate;
@@ -42,8 +40,6 @@ export let readings =[
   {
     id: 100,
     millidate: 1632316200000,
-    date: "2021-09-22",
-    time: "15:10",
     systolic: 170,
     diastolic: 121,
     heartrate: 104,
