@@ -2,7 +2,8 @@ import { renderReadings } from './Components/RenderList/renderLi.js';
 import { showError } from './Components/RenderList/showListError.js';
 import { showAvg } from './Components/AverageComponent/showAvg.js';
 import { removeValidationInfo } from './Components/NewReadingForm/Validations/removeValidInfo.js';
-import { realtimeValidation } from './Components/NewReadingForm/Validations/realTimeValid.js';
+import { realtimeValidation, submitForm, setNowTimeAndDate } from './Components/NewReadingForm/formComponent.js';
+import { closeModals } from './Components/Helpers/closeModals.js';
 
 // Reading class
 export class Reading {
@@ -20,8 +21,11 @@ export class Reading {
 }
 
 //Readings display selectors
-const readingsList = document.querySelector('.readings-list');
+export const readingsList = document.querySelector('.readings-list');
 const readingsError = document.querySelector('.readings--error');
+
+//Form selector
+const form = document.querySelector('.new-reading-inputs--form');
 
 //Selectors for buttons and backdrop
 const addReadingBtn = document.querySelector('.readings--add-button');
@@ -34,7 +38,7 @@ const averageBtnClose = document.querySelector('.average--btn--cancel');
 const averageBtnSave = document.querySelector('.average--btn--save');
 
 //Readings array
-let readings =[
+export let readings =[
   {
     id: 100,
     millidate: 1632316200000,
@@ -81,97 +85,11 @@ async function getData() {
   }
 }
 
-//Form handling
-const form = document.querySelector('.new-reading-inputs--form');
-
-// Form inputs selectors
-const date = form.elements['date'];
-const time = form.elements['time'];
-const systolic = form.elements['systolic'];
-const diastolic = form.elements['diastolic'];
-const heartrate = form.elements['heartrate'];
-const stress = form.elements['stress'];
-
-//Get now date 
-const getNowDate = new Date().toISOString().split('T')[0];
-
-//Get now time
-const getNowTime = new Date().toTimeString().substring(0,5);
-
-//Set now date and time in inputs
-const setNowTimeAndDate = () => {
-  date.value = getNowDate;
-  time.value = getNowTime;
-};
-
 //Open newReadingModal 
 const openNewReadingModal = () => {
   newReadingModal.style.display = 'flex';
   backdrop.style.display = 'block';
   setNowTimeAndDate();
-};
-
-//Close newReadingModal
-const closeModals = () => {
-  newReadingModal.style.display = 'none';
-  averageModal.style.display = 'none';
-  backdrop.style.display = 'none';
-};
-
-//Check form validity
-const isFromValid = () => {
-  const validations = [
-    isDateValid(),
-    isTimeValid(),
-    isSystolicValid(),
-    isDiastolicValid(),
-    isHeartRateValid()
-  ];
-
-  return validations.every(validation => validation === true);
-};
-
-//Submit form
-const submitForm = (event) => {
-  event.preventDefault();
-  
-  const fullDate = (date, time) => {
-    const concatDate = date.concat('T',time);
-    const fullDate = new Date(concatDate);
-    const millisecDate = fullDate.getTime();
-
-    return millisecDate;
-  };
-
-  const risk = () => {
-    if(parseInt(systolic.value) < 130 && parseInt(diastolic.value) < 130 && parseInt(heartrate.value) <130) {
-      return 0
-    } else if(parseInt(systolic.value) > 140 || parseInt(diastolic.value) > 140 || parseInt(heartrate.value) > 140) {
-      return 2
-    } else {
-      return 1
-    }
-  };
-
-  if(isFromValid()) {
-    let newReading = new Reading(
-      '_' + Math.random().toString(36).substr(2, 9),
-      fullDate(date.value, time.value),
-      date.value,
-      time.value,
-      parseInt(systolic.value),
-      parseInt(diastolic.value),
-      parseInt(heartrate.value),
-      parseInt(stress.value),
-      risk()
-    );
-
-    readings.push(newReading);
-    closeModals();
-    removeValidationInfo();
-    form.reset();
-    renderReadings(readings, readingsList);
-  }
 };
 
 //Cancel new reading
@@ -207,6 +125,5 @@ backdrop.addEventListener('click', cancelNewReading);
 statsBtn.addEventListener('click', openStats);
 averageBtnClose.addEventListener('click', closeStats);
 averageBtnSave.addEventListener('click', saveAverage);
-
 
 getData();
