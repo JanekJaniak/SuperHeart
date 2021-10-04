@@ -1,7 +1,11 @@
-import { renderReadings } from './Components/RenderList/renderLi.js'
-import { showError } from './Components/RenderList/showListError.js'
+import { renderReadings } from './Components/RenderList/renderLi.js';
+import { showError } from './Components/RenderList/showListError.js';
+import { showAvg } from './Components/AverageComponent/showAvg.js';
+import { removeValidationInfo } from './Components/NewReadingForm/Validations/removeValidInfo.js';
+import { realtimeValidation } from './Components/NewReadingForm/Validations/realTimeValid.js';
+
 // Reading class
-class Reading {
+export class Reading {
   constructor(id, millidate, date, time, systolic, diastolic, heartrate, stress, risk) {
     this.id = id;
     this.millidate = millidate;
@@ -57,7 +61,7 @@ const sendRequest = (method, url) => {
     .catch(error => {
       throw new Error(error);
     })
-}
+};
 
 async function getData() {
   try {
@@ -76,8 +80,6 @@ async function getData() {
     showError(readingsError);  
   }
 }
-
-
 
 //Form handling
 const form = document.querySelector('.new-reading-inputs--form');
@@ -116,97 +118,6 @@ const closeModals = () => {
   backdrop.style.display = 'none';
 };
 
-//Inputs validation
-const isRequired = (value) => value === '' ? false : true;
-const areValuesValid = (value, min, max) => value >= min && value <= max ? true : false; 
-
-//Show error message and class
-const showErrorMsg = (inputId, message) => {
-  inputId.classList.add('invalid');
-  inputId.nextElementSibling.classList.remove('invisible');
-  inputId.nextElementSibling.textContent=message;
-};
-
-//Remove error message and class
-const removeErrorMsg = (inputId) => {
-  inputId.classList.replace('invalid', 'valid');
-  inputId.nextElementSibling.textContent='null';
-  inputId.nextElementSibling.classList.add('invisible');
-};
-
-//Inputs Validation
-const isDateValid = () => {
-  let isValid = false;
-  
-  if(!isRequired(date.value.trim())) {
-    showErrorMsg(date, 'ENTER DATE OF READING');
-  } else {
-    removeErrorMsg(date);
-    isValid = true;
-  }
-  return isValid;
-};
-
-const isTimeValid = () => {
-  let isValid = false;
-  
-  if(!isRequired(time.value.trim())) {
-    showErrorMsg(time, 'ENTER TIME OF READING');
-  } else {
-    removeErrorMsg(time);
-    isValid = true;
-  }
-  return isValid;
-};
-
-const isSystolicValid = () => {
-  let isValid = false;
-  const min = 40;
-  const max = 300;
-  
-  if (!isRequired(systolic.value.trim())) {
-    showErrorMsg(systolic, 'ENTER VALUE');
-  } else if (!areValuesValid(systolic.value.trim(), min, max)) {
-    showErrorMsg(systolic, `ENTER VALUE BETWEEN ${min} AND ${max}`)
-  } else {
-    removeErrorMsg(systolic);
-    isValid = true;
-  }
-  return isValid;
-};
-
-const isDiastolicValid = () => {
-  let isValid = false;
-  const min = 40;
-  const max = 300;
-  
-  if (!isRequired(diastolic.value.trim())) {
-    showErrorMsg(diastolic, 'ENTER VALUE');
-  } else if (!areValuesValid(diastolic.value.trim(), min, max)) {
-    showErrorMsg(diastolic, `ENTER VALUE BETWEEN ${min} AND ${max}`)
-  } else {
-    removeErrorMsg(diastolic);
-    isValid = true;
-  }
-  return isValid;
-};
-
-const isHeartRateValid = () => {
-  let isValid = false;
-  const min = 40;
-  const max = 200;
-  
-  if (!isRequired(heartrate.value.trim())) {
-    showErrorMsg(heartrate, 'ENTER VALUE');
-  } else if (!areValuesValid(heartrate.value.trim(), min, max)) {
-    showErrorMsg(heartrate, `ENTER VALUE BETWEEN ${min} AND ${max}`)
-  } else {
-    removeErrorMsg(heartrate);
-    isValid = true;
-  }
-  return isValid;
-};
-
 //Check form validity
 const isFromValid = () => {
   const validations = [
@@ -218,40 +129,6 @@ const isFromValid = () => {
   ];
 
   return validations.every(validation => validation === true);
-};
-
-//Realtime validation
-const realtimeValidation = (event) => {
-  switch(event.target.id) {
-    case 'date':
-      isDateValid();
-      break;
-    case 'time':
-      isTimeValid();
-      break;
-    case 'systolic':
-      isSystolicValid();
-      break;
-    case 'diastolic':
-      isDiastolicValid();
-      break;
-    case 'heartrate':
-      isHeartRateValid();
-      break;
-  }
-};
-
-//Input error snd success messages and classes remover
-const removeValidationInfo = () => {
-  const messagesElements = document.getElementsByTagName('small');
-
-  for (let i = 0; i < messagesElements.length; i++) {
-    let element = messagesElements[i];
-
-    element.innerText='null';
-    element.classList.add('invisible');
-    element.previousElementSibling.classList.remove('invalid', 'valid')
-  }
 };
 
 //Submit form
@@ -293,7 +170,7 @@ const submitForm = (event) => {
     closeModals();
     removeValidationInfo();
     form.reset();
-    renderReadings();
+    renderReadings(readings, readingsList);
   }
 };
 
@@ -309,7 +186,7 @@ const cancelNewReading = (event) => {
 const openStats = () => {
   averageModal.style.display = 'flex';
   backdrop.style.display = 'block';
-  showAvg();
+  showAvg(readings);
 };
 
 const closeStats = () => {
@@ -320,81 +197,6 @@ const saveAverage = () => {
   console.log('Save average');
   closeModals();
 }
-
-// Calculate average values of readings
-const calcAvg = (arr) => {
-  const keys = ['systolic', 'diastolic', 'heartrate', 'stress'];
-  const avgValues = [];
-  
-  keys.forEach(key => {
-    const allValues = arr.map(el => el[key]);
-    const sumValues = allValues.reduce((acc, cur) => acc + cur );
-    const avgValue = Math.round(sumValues / arr.length);
-    
-    avgValues.push(avgValue);
-  });
-  
-  //Check risk value 
-  const risk = () => {
-    if(avgValues.every(el => el < 130)) {
-      return 0;
-    } else if(avgValues.some(el => el > 130) && avgValues.every(el => el < 140)) {
-      return 1;
-    } else {
-      return 2;
-    }
-  };
-
-  const avgReading = new Reading(
-    '_' + Math.random().toString(36).substr(2, 9),
-    Date.now(),
-    '',
-    '',
-    avgValues[0],
-    avgValues[1],
-    avgValues[2],
-    avgValues[3],
-    risk()
-  )
-  return avgReading;
-};
-
-// Show average readings in table
-const showAvg = () => {
-  const firstRowElem = document.querySelector('.first-row-elem');
-  const secRowElem = document.querySelector('.sec-row-elem');
-  const message = document.querySelector('.average--message');
-  const readingsCalculated = [readings.slice(0,14), readings.slice(0,6)];
-  const avgReadingValues = [];
-  const avgReadingElem = [firstRowElem, secRowElem];
-
-  readingsCalculated.forEach(arr => avgReadingValues.push(calcAvg(arr)));
-
-  avgReadingElem.forEach((arr, i) => {
-    arr.innerText = avgReadingValues[i].heartrate;
-    arr.previousElementSibling.innerText = 
-      `${avgReadingValues[i].systolic} / ${avgReadingValues[i].diastolic}`;
-    arr.nextElementSibling.innerText = avgReadingValues[i].stress;
-
-    if(avgReadingValues[i].risk === 0) {
-      arr.parentElement.classList.add('risk--low');
-
-    } else if(avgReadingValues[i].risk === 2) {
-      arr.parentElement.classList.add('risk--high');
-
-      message.innerText = 'You should visit a doctor! Show him this table.';
-      message.classList.add('risk--high')
-      
-    } else {
-      arr.parentElement.classList.add('risk--mid');
-
-      if(!message.classList.contains('risk--high')){
-        message.innerText = 'Be carefull! Keep measuring Your pressure';
-        message.classList.add('risk--mid');
-      }
-    }
-  });
-};
 
 //Event listeners 
 addReadingBtn.addEventListener('click', openNewReadingModal);
