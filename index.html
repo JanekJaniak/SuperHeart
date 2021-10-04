@@ -6,17 +6,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SuperHeart</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 </head>
 <body>
+  <div class="backdrop"></div>
   <header>
-
+    <img class="main-logo" src="./img/logo.png" height="60px" width="224px">
   </header>
   <main>
-
+    <div class="main-app">
+      <div class="readings">
+        <h2 class="readings--heading">READINGS</h2>
+        <div class="readings--display">
+          <div class="display-bar">
+            <h5 class="display-bar--element">Pressure</h5>
+            <h5 class="display-bar--element">Heart rate</h5>
+            <h5 class="display-bar--element">Stress</h5>
+          </div>
+          <div class="readings--error"></div>
+          <ul class="readings-list"></ul>
+        </div>
+        <button class="readings--add-button">ADD</button>
+      </div>
+      <nav class="main-app--nav">
+        <button class="main-btn main-btn--stats"><div class="icon"></div>STATS</button>
+      </nav>
+    </div>
+    <div class="new-reading-modal">
+      <h3  class="new-reading-heading">NEW READING</h2>
+      <div class="new-reading">
+        <form class="new-reading-inputs--form">
+          <label for="date">DATE</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+          >
+          <small class="invisible">null</small>
+          <label for="time">TIME</label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            step="60"
+          >
+          <small class="invisible">null</small>
+          <label for="systolic">SYSTOLIC</label>
+          <input
+            type="number"
+            id="systolic"
+            name="systolic"
+            placeholder="120"
+          >
+          <small class="invisible">null</small>
+          <label for="diastolic">DIASTOLIC</label>
+          <input
+            type="number"
+            id="diastolic"
+            name="diastolic"
+            placeholder="80"
+          >
+          <small class="invisible">null</small>
+          <label for="heartrate">HEART RATE</label>
+          <input
+            type="number"
+            id="heartrate"
+            name="heartrate"
+            placeholder="80"
+          >
+          <small class="invisible">null</small>
+          <label for="stress">STRESS</label>
+          <input
+            type="range"
+            min="1"
+            max="3"
+            step="1"
+            value="1"
+            id="stress"
+            name="stress"
+          >
+          <div class="new-reading-inputs--controls">
+            <button type="submit" class="new-reading-btn new-reading-btn--save">SAVE</button>
+            <button class="new-reading-btn new-reading-btn--cancel">CANCEL</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="average">
+      <h3 class="average--heading">AVERGE OF READINGS</h3>
+      <table class="table">
+        <thead>
+          <tr class="table--tr--head">
+            <th class="table--td-mid">Average of last</th>
+            <th class="table--td-mid">Pressure</th>
+            <th class="table--td-mid">Heart rate</th>
+            <th>Stress</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table--tr">
+            <td class="table--td-mid">7 days</td>
+            <td class="table--td-mid"></td>
+            <td class="table--td-mid first-row-elem"></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="table--td-mid">3 days</td>
+            <td class="table--td-mid "></td>
+            <td class="table--td-mid sec-row-elem"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="average--message">Everything is great!</p>
+      <div class="average-controls">
+        <button class="average--btn average--btn--save">SAVE</button>
+        <button class="average--btn average--btn--cancel">CLOSE</button>
+      </div>
+    </div>
   </main>
-  <footer>
-    
-  </footer>
-  <script src="js/main.js"></script>
+  <script src="js/main.js" type="module"></script>
 </body>
 </html>

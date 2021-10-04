@@ -1,0 +1,92 @@
+h3
+  margin-top: 0
+  color: $blue
+  font-weight: 600
+
+input
+  box-sizing: border-box
+  background-color: $grey-input
+  border: $border
+  border-color: $grey-light
+  width: 240px
+  &:focus
+    border: $border
+    border-color: $amber
+    outline: none
+
+form
+  text-align: left
+
+label
+  font-size: 15px
+  font-weight: 600
+  display: block
+  margin-top: $m-xs
+
+small
+  font-size: 11px 
+  margin-top: 2px
+  display: block
+  color: $red
+
+.invalid
+  border: $border
+  border-color: $red
+  outline: none
+
+.valid
+  border: $border
+  border-color: $green
+  outline: none
+
+.invisible
+  visibility: hidden
+
+.new-reading-modal
+  display: none
+  flex-direction: column
+  justify-content: space-between
+  position: fixed
+  top: 45%
+  left: 50%
+  transform: translate(-50%, -50%)
+  background-color: $grey-light
+  height: 560px
+  width: 300px
+  margin: auto
+  border: $border
+  border-radius: $rad
+  box-sizing: border-box
+  text-align: center
+  padding: $p-pri
+
+.backdrop
+  display: none
+  position: fixed
+  width: 100%
+  height: 100%
+  background-color: rgba(0, 0, 0, 0.4)
+
+.new-reading-inputs--controls
+  margin-top: $air
+  text-align: center
+
+.new-reading-btn
+  width: 100px
+  box-sizing: border-box
+  cursor: pointer
+  &--save
+    background-color: $green
+    &:hover
+      cursor: pointer
+      transition: background-color 0.5s ease-out
+      background-color: $green-light
+
+  &--cancel
+    background-color: $red
+    color: white
+    margin-left: $m-s
+    &:hover
+      cursor: pointer
+      transition: background-color 0.5s ease-out
+      background-color: $red-light
