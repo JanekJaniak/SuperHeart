@@ -7,11 +7,11 @@ export const renderReadingElement = (reading, target) => {
 
   const headingDate = document.createElement('p');
   headingDate.classList.add('element-heading--date');
-  headingDate.innerText = reading.date;
+  headingDate.innerText = new Date(reading.millidate).toISOString().slice(0,10);
   
   const headingTime = document.createElement('p');
   headingTime.classList.add('element-heading--time');
-  headingTime.innerText = reading.time;
+  headingTime.innerText = new Date(reading.millidate).toTimeString().slice(0,5);
 
   const elementReadings = document.createElement('div');
   elementReadings.classList.add('element-readings');
